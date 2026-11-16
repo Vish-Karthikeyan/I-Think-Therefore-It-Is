@@ -1,0 +1,2 @@
+condition,part,mmlu_pro_chemistry/sample_len,"mmlu_pro_chemistry/exact_match,custom-extract","mmlu_pro_chemistry/exact_match_stderr,custom-extract",mmlu_pro_chemistry/n,mmlu_pro_health/sample_len,"mmlu_pro_health/exact_match,custom-extract","mmlu_pro_health/exact_match_stderr,custom-extract",mmlu_pro_health/n,mmlu_pro_other/sample_len,"mmlu_pro_other/exact_match,custom-extract","mmlu_pro_other/exact_match_stderr,custom-extract",mmlu_pro_other/n
+steered,mmlu_pro:2of4,500,0.192,0.017632180454360973,500,500,0.38,0.021728881438701716,500,500,0.382,0.021750820591250837,500

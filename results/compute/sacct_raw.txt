@@ -1,0 +1,227 @@
+JobID|JobName|Partition|QOS|State|Submit|Start|End|ElapsedRaw|AllocTRES|ReqMem|ExitCode|NodeList
+1970415|bash|gpu|normal|CANCELLED by 431799|2026-11-10T13:22:46|None|2026-11-10T13:32:46|0||8G|0:0|None assigned
+1970426|gpucheck.sbatch|gpu|normal|COMPLETED|2026-11-10T13:35:17|2026-11-10T14:21:34|2026-11-10T14:21:42|8|billing=2,cpu=2,energy=1549,gres/gpu=1,mem=4G,node=1|4G|0:0|oat-02
+1970427|idea-olmo_instruct|gpu|normal|COMPLETED|2026-11-10T13:41:03|2026-11-10T19:22:35|2026-11-10T19:43:47|1272|billing=10,cpu=10,energy=250186,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1971111|idea-olmo_base|gpu|normal|COMPLETED|2026-11-10T14:30:34|2026-11-10T19:29:06|2026-11-10T19:38:11|545|billing=10,cpu=10,energy=106543,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1971112|idea-olmo_sft|gpu|normal|COMPLETED|2026-11-10T14:30:34|2026-11-11T06:38:38|2026-11-11T07:01:22|1364|billing=10,cpu=10,energy=293441,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1971113|idea-olmo_dpo|gpu|normal|COMPLETED|2026-11-10T14:30:34|2026-11-11T07:02:41|2026-11-11T07:25:46|1385|billing=10,cpu=10,energy=295825,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1971127|idea-llama|gpu,normal|normal|CANCELLED by 431799|2026-11-10T14:54:37|None|2026-11-10T20:36:55|0||32G|0:0|None assigned
+1972727|idea-gen-main|normal|normal|CANCELLED by 431799|2026-11-11T10:51:10|None|2026-11-11T11:06:36|0||32G|0:0|None assigned
+1972728|idea-olmo_base|gpu,normal|normal|CANCELLED by 431799|2026-11-11T10:51:11|None|2026-11-11T16:56:04|0||32G|0:0|None assigned
+1972729|idea-olmo_sft|gpu,normal|normal|CANCELLED by 431799|2026-11-11T10:51:11|None|2026-11-11T16:56:04|0||32G|0:0|None assigned
+1972730|idea-olmo_dpo|gpu,normal|normal|CANCELLED by 431799|2026-11-11T10:51:11|None|2026-11-11T16:56:04|0||32G|0:0|None assigned
+1972731|idea-olmo_instruct|gpu,normal|normal|CANCELLED by 431799|2026-11-11T10:51:11|None|2026-11-11T16:56:04|0||32G|0:0|None assigned
+1972732|idea-llama|gpu,normal|normal|CANCELLED by 431799|2026-11-11T10:51:11|None|2026-11-11T16:56:04|0||32G|0:0|None assigned
+1974104|idea-prep-olmo_base|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T17:35:42|2026-11-11T17:38:14|152|billing=10,cpu=10,energy=35150,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974105|idea-olmo_base-0-of-2|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T17:45:16|2026-11-11T17:56:34|678|billing=10,cpu=10,energy=156769,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974106|idea-olmo_base-1-of-2|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T17:56:50|2026-11-11T18:08:00|670|billing=10,cpu=10,energy=154528,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974107|idea-prep-olmo_sft|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T17:38:43|2026-11-11T17:44:59|376|billing=10,cpu=10,energy=86370,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974108|idea-olmo_sft-0-of-3|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T18:08:23|2026-11-11T18:29:02|1239|billing=10,cpu=10,energy=286814,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974109|idea-olmo_sft-1-of-3|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T18:29:11|2026-11-11T18:49:43|1232|billing=10,cpu=10,energy=309551,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974110|idea-olmo_sft-2-of-3|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T18:49:48|2026-11-11T19:11:17|1289|billing=10,cpu=10,energy=324846,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974111|idea-prep-olmo_dpo|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T19:11:28|2026-11-11T19:18:13|405|billing=10,cpu=10,energy=101757,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974112|idea-olmo_dpo-0-of-3|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T19:25:37|2026-11-11T19:46:27|1250|billing=10,cpu=10,energy=314702,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974113|idea-olmo_dpo-1-of-3|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T19:46:54|2026-11-11T20:07:34|1240|billing=10,cpu=10,energy=311141,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974114|idea-olmo_dpo-2-of-3|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T20:07:41|2026-11-11T20:29:07|1286|billing=10,cpu=10,energy=322380,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974115|idea-prep-olmo_instruct|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T19:18:35|2026-11-11T19:23:36|301|billing=10,cpu=10,energy=75146,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974116|idea-olmo_instruct-0-of-8|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T20:29:10|2026-11-11T20:42:55|825|billing=10,cpu=10,energy=206391,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974117|idea-olmo_instruct-1-of-8|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T20:43:21|2026-11-11T20:56:59|818|billing=10,cpu=10,energy=204404,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974118|idea-olmo_instruct-2-of-8|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T20:57:27|2026-11-11T21:10:48|801|billing=10,cpu=10,energy=199792,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974119|idea-olmo_instruct-3-of-8|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T21:11:01|2026-11-11T21:24:35|814|billing=10,cpu=10,energy=202431,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974120|idea-olmo_instruct-4-of-8|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T21:24:37|2026-11-11T21:38:36|839|billing=10,cpu=10,energy=206981,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974121|idea-olmo_instruct-5-of-8|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-11T21:29:39|2026-11-11T21:43:35|836|billing=10,cpu=10,energy=232588,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974122|idea-olmo_instruct-6-of-8|gpu|normal|COMPLETED|2026-11-11T16:56:07|2026-11-12T00:00:55|2026-11-12T00:14:26|811|billing=10,cpu=10,energy=206936,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974123|idea-olmo_instruct-7-of-8|gpu|normal|COMPLETED|2026-11-11T16:56:08|2026-11-12T00:15:01|2026-11-12T00:28:12|791|billing=10,cpu=10,energy=202001,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974124|idea-prep-llama|gpu|normal|COMPLETED|2026-11-11T16:56:08|2026-11-12T00:28:41|2026-11-12T00:31:46|185|billing=10,cpu=10,energy=46966,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974125|idea-llama-0-of-4|gpu|normal|COMPLETED|2026-11-11T16:56:08|2026-11-12T01:51:30|2026-11-12T02:09:43|1093|billing=10,cpu=10,energy=275941,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974126|idea-llama-1-of-4|gpu|normal|COMPLETED|2026-11-11T16:56:08|2026-11-12T02:10:12|2026-11-12T02:27:36|1044|billing=10,cpu=10,energy=264243,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974127|idea-llama-2-of-4|gpu|normal|COMPLETED|2026-11-11T16:56:08|2026-11-12T02:27:41|2026-11-12T02:45:29|1068|billing=10,cpu=10,energy=270057,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974128|idea-llama-3-of-4|gpu|normal|COMPLETED|2026-11-11T16:56:08|2026-11-12T04:01:58|2026-11-12T04:19:38|1060|billing=10,cpu=10,energy=270115,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974129|idea-fit|normal|normal|COMPLETED|2026-11-11T16:56:08|2026-11-12T04:20:07|2026-11-12T04:37:14|1027|billing=10,cpu=10,mem=32G,node=1|32G|0:0|barley-04
+1974130|idea-rq3-olmo_instruct|gpu|normal|TIMEOUT|2026-11-11T16:56:08|2026-11-12T11:59:23|2026-11-12T17:59:42|21619|billing=10,cpu=10,energy=4572620,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-05
+1974131|idea-rq3-llama|gpu,normal|normal|CANCELLED by 431799|2026-11-11T16:56:08|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1974318|idea-diag-olmo_base|gpu|normal|COMPLETED|2026-11-11T18:06:00|2026-11-12T04:20:07|2026-11-12T04:21:34|87|billing=10,cpu=10,energy=22478,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974319|idea-diag-olmo_sft|gpu|normal|COMPLETED|2026-11-11T18:06:00|2026-11-12T04:21:37|2026-11-12T04:24:31|174|billing=10,cpu=10,energy=44317,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974320|idea-diag-olmo_dpo|gpu|normal|COMPLETED|2026-11-11T18:06:00|2026-11-12T04:24:38|2026-11-12T04:27:29|171|billing=10,cpu=10,energy=43502,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974321|idea-diag-olmo_instruct|gpu|normal|COMPLETED|2026-11-11T18:06:00|2026-11-12T04:27:39|2026-11-12T04:29:48|129|billing=10,cpu=10,energy=32842,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974322|idea-diag-llama|gpu|normal|COMPLETED|2026-11-11T18:06:00|2026-11-12T04:30:10|2026-11-12T04:31:37|87|billing=10,cpu=10,energy=22034,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974323|idea-xprep-olmo13_base|gpu|normal|COMPLETED|2026-11-11T18:06:00|2026-11-12T04:31:41|2026-11-12T04:37:59|378|billing=10,cpu=10,energy=96996,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974324|idea-x-olmo13_base-0-of-2|gpu|normal|COMPLETED|2026-11-11T18:06:00|2026-11-12T06:59:50|2026-11-12T07:18:44|1134|billing=10,cpu=10,energy=286694,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974325|idea-x-olmo13_base-1-of-2|gpu|normal|COMPLETED|2026-11-11T18:06:00|2026-11-12T07:19:07|2026-11-12T07:37:29|1102|billing=10,cpu=10,energy=256722,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974579|idea-diag-olmo_base|gpu,normal|normal|CANCELLED by 431799|2026-11-11T19:11:34|None|2026-11-11T20:19:24|0||32G|0:0|None assigned
+1974580|idea-diag-olmo_sft|gpu,normal|normal|CANCELLED by 431799|2026-11-11T19:11:34|None|2026-11-11T20:19:24|0||32G|0:0|None assigned
+1974581|idea-diag-olmo_dpo|gpu,normal|normal|CANCELLED by 431799|2026-11-11T19:11:34|None|2026-11-11T20:19:24|0||32G|0:0|None assigned
+1974582|idea-diag-olmo_instruct|gpu,normal|normal|CANCELLED by 431799|2026-11-11T19:11:34|None|2026-11-11T20:19:24|0||32G|0:0|None assigned
+1974706|idea-diag-olmo_base|gpu,normal|normal|CANCELLED by 431799|2026-11-11T20:11:35|None|2026-11-11T20:19:24|0||32G|0:0|None assigned
+1974707|idea-diag-olmo_sft|gpu,normal|normal|CANCELLED by 431799|2026-11-11T20:11:35|None|2026-11-11T20:19:24|0||32G|0:0|None assigned
+1974708|idea-diag-olmo_dpo|gpu,normal|normal|CANCELLED by 431799|2026-11-11T20:11:35|None|2026-11-11T20:19:24|0||32G|0:0|None assigned
+1974709|idea-diag-olmo_instruct|gpu,normal|normal|CANCELLED by 431799|2026-11-11T20:11:35|None|2026-11-11T20:19:24|0||32G|0:0|None assigned
+1974765|idea-xprep-olmo13_sft|gpu|normal|COMPLETED|2026-11-11T20:19:24|2026-11-12T04:38:13|2026-11-12T04:54:42|989|billing=10,cpu=10,energy=251213,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974766|idea-x-olmo13_sft-0-of-3|gpu|normal|COMPLETED|2026-11-11T20:19:24|2026-11-12T07:20:07|2026-11-12T07:53:45|2018|billing=10,cpu=10,energy=469870,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1974767|idea-x-olmo13_sft-1-of-3|gpu|normal|COMPLETED|2026-11-11T20:19:24|2026-11-12T08:52:17|2026-11-12T09:25:58|2021|billing=10,cpu=10,energy=433371,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-05
+1974768|idea-x-olmo13_sft-2-of-3|gpu|normal|COMPLETED|2026-11-11T20:19:24|2026-11-12T09:26:05|2026-11-12T10:00:53|2088|billing=10,cpu=10,energy=449418,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-05
+1974769|idea-xprep-olmo13_dpo|gpu|normal|COMPLETED|2026-11-11T20:19:24|2026-11-12T09:49:58|2026-11-12T10:05:16|918|billing=10,cpu=10,energy=227476,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974770|idea-x-olmo13_dpo-0-of-3|gpu|normal|COMPLETED|2026-11-11T20:19:24|2026-11-12T10:05:45|2026-11-12T10:38:15|1950|billing=10,cpu=10,energy=490165,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974771|idea-x-olmo13_dpo-1-of-3|gpu|normal|COMPLETED|2026-11-11T20:19:24|2026-11-12T10:38:15|2026-11-12T11:10:19|1924|billing=10,cpu=10,energy=436028,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974772|idea-x-olmo13_dpo-2-of-3|gpu|normal|COMPLETED|2026-11-11T20:19:24|2026-11-12T11:10:26|2026-11-12T11:44:11|2025|billing=10,cpu=10,energy=439110,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974923|idea-xprep-olmo13_instruct|gpu|normal|COMPLETED|2026-11-11T21:29:35|2026-11-12T10:01:14|2026-11-12T10:13:33|739|billing=10,cpu=10,energy=164753,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-05
+1974924|idea-x-olmo13_instruct-0-of-4|gpu|normal|COMPLETED|2026-11-11T21:29:35|2026-11-12T11:44:19|2026-11-12T12:19:04|2085|billing=10,cpu=10,energy=483253,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1974925|idea-x-olmo13_instruct-1-of-4|gpu|normal|COMPLETED|2026-11-11T21:29:35|2026-11-13T00:56:51|2026-11-13T01:31:12|2061|billing=16,cpu=16,energy=544583,gres/gpu=1,mem=62.50G,node=1|62.50G|0:0|oat-03
+1974926|idea-x-olmo13_instruct-2-of-4|gpu|normal|COMPLETED|2026-11-11T21:29:35|2026-11-13T02:17:39|2026-11-13T02:51:43|2044|billing=16,cpu=16,energy=592006,gres/gpu=1,mem=62.50G,node=1|62.50G|0:0|oat-03
+1974927|idea-x-olmo13_instruct-3-of-4|gpu|normal|COMPLETED|2026-11-11T21:29:35|2026-11-13T02:51:48|2026-11-13T03:24:43|1975|billing=16,cpu=16,energy=572800,gres/gpu=1,mem=62.50G,node=1|62.50G|0:0|oat-03
+1975481|idea-xprep-phi4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T00:32:57|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1976000|idea-xprep-tulu_base|gpu,normal|normal|CANCELLED by 431799|2026-11-12T02:12:58|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1976300|idea-xprep-tulu_sft|gpu,normal|normal|CANCELLED by 431799|2026-11-12T04:22:59|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1976313|idea-xprep-tulu_dpo|gpu,normal|normal|CANCELLED by 431799|2026-11-12T04:28:00|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1976336|idea-xprep-tulu_final|gpu,normal|normal|CANCELLED by 431799|2026-11-12T04:38:00|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1976534|idea-xprep-olmo_instruct_sp|gpu,normal|normal|CANCELLED by 431799|2026-11-12T07:38:02|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1976706|idea-xprep-llama_sp|gpu,normal|normal|CANCELLED by 431799|2026-11-12T10:03:03|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1976736|idea-xprep-olmo_sft|gpu,normal|normal|CANCELLED by 431799|2026-11-12T10:18:03|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1976821|idea-xprep-olmo_dpo|gpu,normal|normal|CANCELLED by 431799|2026-11-12T11:13:04|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1977573|idea-xprep-olmo_instruct_pv1|gpu,normal|normal|CANCELLED by 431799|2026-11-12T12:23:04|None|2026-11-12T19:50:55|0||32G|0:0|None assigned
+1979284|idea-steer-llama|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:04|None|2026-11-12T21:43:40|0||62.50G|0:0|None assigned
+1979287|idea-aud-olmo_instruct-unsteered-syceval|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:25|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979288|idea-aud-olmo_instruct-unsteered-bbq|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:25|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979289|idea-aud-olmo_instruct-unsteered-mmlu_pro-0of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:25|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979290|idea-aud-olmo_instruct-unsteered-mmlu_pro-1of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:25|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979291|idea-aud-olmo_instruct-unsteered-mmlu_pro-2of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979292|idea-aud-olmo_instruct-unsteered-mmlu_pro-3of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979293|idea-aud-olmo_instruct-steered-syceval|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979294|idea-aud-olmo_instruct-steered-bbq|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979295|idea-aud-olmo_instruct-steered-mmlu_pro-0of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979296|idea-aud-olmo_instruct-steered-mmlu_pro-1of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979297|idea-aud-olmo_instruct-steered-mmlu_pro-2of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979298|idea-aud-olmo_instruct-steered-mmlu_pro-3of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979299|idea-aud-olmo_instruct-random-syceval|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979300|idea-aud-olmo_instruct-random-bbq|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979301|idea-aud-olmo_instruct-random-mmlu_pro-0of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979302|idea-aud-olmo_instruct-random-mmlu_pro-1of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979303|idea-aud-olmo_instruct-random-mmlu_pro-2of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979304|idea-aud-olmo_instruct-random-mmlu_pro-3of4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T19:51:26|None|2026-11-12T21:39:54|0||62.50G|0:0|None assigned
+1979724|idea-bundle-olmo_instruct-us|gpu|gpu|COMPLETED|2026-11-12T21:40:25|2026-11-13T03:25:43|2026-11-13T07:23:09|14246|billing=64,cpu=64,energy=2758412,gres/gpu=4,mem=250G,node=1|250G|0:0|oat-02
+1979725|idea-bundle-olmo_instruct-rand|gpu|gpu|CANCELLED by 431799|2026-11-12T21:40:25|None|2026-11-12T21:43:40|0||250G|0:0|None assigned
+1979730|idea-xprep-phi4|gpu,normal|normal|CANCELLED by 431799|2026-11-12T21:40:49|None|2026-11-12T21:56:34|0||62.50G|0:0|None assigned
+1979734|idea-xprep-tulu_base|gpu,normal|normal|CANCELLED by 431799|2026-11-12T21:40:50|None|2026-11-12T21:56:34|0||62.50G|0:0|None assigned
+1979736|idea-xprep-tulu_sft|gpu,normal|normal|CANCELLED by 431799|2026-11-12T21:40:50|None|2026-11-12T21:56:34|0||62.50G|0:0|None assigned
+1979739|idea-xprep-tulu_dpo|gpu,normal|normal|CANCELLED by 431799|2026-11-12T21:40:50|None|2026-11-12T21:56:34|0||62.50G|0:0|None assigned
+1979742|idea-xprep-tulu_final|gpu,normal|normal|CANCELLED by 431799|2026-11-12T21:40:50|None|2026-11-12T21:56:34|0||62.50G|0:0|None assigned
+1979745|idea-xprep-olmo_instruct_sp|gpu,normal|normal|CANCELLED by 431799|2026-11-12T21:40:50|None|2026-11-12T21:56:34|0||62.50G|0:0|None assigned
+1979748|idea-xprep-llama_sp|gpu,normal|normal|CANCELLED by 431799|2026-11-12T21:40:50|None|2026-11-12T21:56:34|0||62.50G|0:0|None assigned
+1979751|idea-xprep-olmo_sft|gpu,normal|normal|CANCELLED by 431799|2026-11-12T21:40:51|None|2026-11-12T21:56:34|0||62.50G|0:0|None assigned
+1979767|idea-bundle-olmo_rand-llama_steer|gpu|gpu|CANCELLED by 431799|2026-11-12T21:43:31|None|2026-11-13T11:04:45|0||250G|0:0|None assigned
+1979790|idea-xprep-olmo_dpo|gpu,normal|normal|CANCELLED by 431799|2026-11-12T21:45:51|None|2026-11-12T21:56:34|0||62.50G|0:0|None assigned
+1979825|idea-bundle-ext|gpu|gpu|CANCELLED by 431799|2026-11-12T21:56:37|None|2026-11-13T11:04:45|0||250G|0:0|None assigned
+1981000|idea-s-olmoi-rand-p0|gpu|gpu|COMPLETED|2026-11-13T11:04:55|2026-11-13T11:17:23|2026-11-13T11:41:40|1457|billing=10,cpu=10,energy=326811,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981001|idea-s-olmoi-rand-p1|gpu|gpu|COMPLETED|2026-11-13T11:04:55|2026-11-13T12:45:28|2026-11-13T13:19:56|2068|billing=10,cpu=10,energy=463840,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981002|idea-s-olmoi-rand-p2|gpu|gpu|REQUEUED|2026-11-13T11:04:55|2026-11-13T13:48:34|2026-11-13T15:28:35|6001|billing=10,cpu=10,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981003|idea-s-olmoi-rand-p3|gpu|gpu|COMPLETED|2026-11-13T11:04:55|2026-11-13T14:48:48|2026-11-13T15:19:50|1862|billing=10,cpu=10,energy=507057,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981004|idea-s-olmoi-rand-p4|gpu|gpu|COMPLETED|2026-11-13T11:04:55|2026-11-13T15:21:35|2026-11-13T15:47:33|1558|billing=10,cpu=10,energy=373625,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981005|idea-s-olmoi-rand-p5|gpu|gpu|COMPLETED|2026-11-13T11:04:55|2026-11-13T15:28:44|2026-11-13T16:51:42|4978|billing=10,cpu=10,energy=1167846,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981006|idea-s-olmoi-rand-p6|gpu|gpu|COMPLETED|2026-11-13T11:04:55|2026-11-13T17:29:34|2026-11-13T17:43:50|856|billing=10,cpu=10,energy=218624,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981007|idea-s-llama-steer|gpu|gpu|REQUEUED|2026-11-13T11:04:56|2026-11-13T11:15:05|2026-11-13T13:55:05|9600|billing=12,cpu=12,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-02
+1981008|idea-s-llama-unst-p0|gpu|gpu|COMPLETED|2026-11-13T11:04:56|2026-11-13T17:51:23|2026-11-13T19:28:01|5798|billing=10,cpu=10,energy=1370913,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1981009|idea-s-llama-unst-p1|gpu|gpu|COMPLETED|2026-11-13T11:04:56|2026-11-13T18:18:32|2026-11-13T19:33:37|4505|billing=10,cpu=10,energy=1189950,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981010|idea-s-llama-unst-p2|gpu|gpu|REQUEUED|2026-11-13T11:04:56|2026-11-13T18:23:33|2026-11-13T20:03:37|6004|billing=10,cpu=10,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981011|idea-s-llama-unst-p3|gpu|gpu|COMPLETED|2026-11-13T11:04:56|2026-11-13T19:33:38|2026-11-13T21:04:01|5423|billing=10,cpu=10,energy=1390493,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981012|idea-s-llama-unst-p4|gpu|gpu|COMPLETED|2026-11-13T11:04:56|2026-11-13T20:30:46|2026-11-13T21:46:11|4525|billing=10,cpu=10,energy=1077712,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1981013|idea-s-llama-unst-p5|gpu|gpu|REQUEUED|2026-11-13T11:04:56|2026-11-13T22:04:44|2026-11-13T23:44:44|6000|billing=10,cpu=10,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-04
+1981014|idea-s-llama-unst-p6|gpu|gpu|COMPLETED|2026-11-13T11:04:56|2026-11-13T22:34:01|2026-11-13T23:26:34|3153|billing=10,cpu=10,energy=746586,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1981015|idea-s-llama-steered-p0|gpu|gpu|COMPLETED|2026-11-13T11:04:56|2026-11-14T16:09:53|2026-11-14T17:37:38|5265|billing=10,cpu=10,energy=1146725,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-05
+1981016|idea-s-llama-steered-p1|gpu|gpu|COMPLETED|2026-11-13T11:04:56|2026-11-14T17:54:20|2026-11-14T19:18:59|5079|billing=10,cpu=10,energy=1100574,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-05
+1981017|idea-s-llama-steered-p2|gpu|gpu|REQUEUED|2026-11-13T11:04:56|2026-11-14T18:20:34|2026-11-14T20:00:34|6000|billing=24,cpu=24,gres/gpu=1,mem=90000M,node=1|90000M|0:0|oat-01
+1981018|idea-s-llama-steered-p3|gpu|gpu|COMPLETED|2026-11-13T11:04:56|2026-11-14T19:19:04|2026-11-14T20:48:34|5370|billing=24,cpu=24,energy=1123890,gres/gpu=1,mem=90000M,node=1|90000M|0:0|oat-05
+1981019|idea-s-llama-steered-p4|gpu|gpu|COMPLETED|2026-11-13T11:04:56|2026-11-14T20:00:35|2026-11-14T21:11:54|4279|billing=36,cpu=36,energy=993939,gres/gpu=1,mem=143500M,node=1|143500M|0:0|oat-01
+1981020|idea-s-llama-steered-p5|gpu|gpu|REQUEUED|2026-11-13T11:04:56|2026-11-14T20:32:41|2026-11-14T22:12:44|6003|billing=22,cpu=22,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-02
+1981021|idea-s-llama-steered-p6|gpu|gpu|COMPLETED|2026-11-13T11:04:57|2026-11-14T20:48:48|2026-11-14T22:24:27|5739|billing=22,cpu=22,energy=1132632,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-02
+1981022|idea-s-llama-rand-p0|gpu|gpu|REQUEUED|2026-11-13T11:04:57|2026-11-14T21:29:59|2026-11-14T23:10:03|6004|billing=22,cpu=22,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-06
+1981023|idea-s-llama-rand-p1|gpu|gpu|REQUEUED|2026-11-13T11:04:57|2026-11-14T21:43:03|2026-11-14T23:23:06|6003|billing=22,cpu=22,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1981024|idea-s-llama-rand-p2|gpu|gpu|REQUEUED|2026-11-13T11:04:57|2026-11-14T22:12:44|2026-11-14T23:52:47|6003|billing=22,cpu=22,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-02
+1981025|idea-s-llama-rand-p3|gpu|gpu|REQUEUED|2026-11-13T11:04:57|2026-11-14T22:24:27|2026-11-15T00:04:27|6000|billing=22,cpu=22,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-02
+1981026|idea-s-llama-rand-p4|gpu|gpu|REQUEUED|2026-11-13T11:04:57|2026-11-14T23:23:06|2026-11-15T01:03:09|6003|billing=22,cpu=22,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-05
+1981027|idea-s-llama-rand-p5|gpu|gpu|REQUEUED|2026-11-13T11:04:57|2026-11-14T23:23:36|2026-11-15T01:03:39|6003|billing=22,cpu=22,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1981028|idea-s-llama-rand-p6|gpu|normal|COMPLETED|2026-11-13T11:04:57|2026-11-14T20:31:40|2026-11-14T21:43:03|4283|billing=22,cpu=22,energy=1016845,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1981029|idea-s-x-phi4-prep|gpu|normal|COMPLETED|2026-11-13T11:04:57|2026-11-13T11:12:35|2026-11-13T11:21:49|554|billing=14,cpu=14,energy=124742,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-02
+1981030|idea-s-x-phi4-s0|gpu|normal|REQUEUED|2026-11-13T11:04:57|2026-11-13T11:21:49|2026-11-13T12:01:49|2400|billing=14,cpu=14,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-02
+1981031|idea-s-x-phi4-s1|gpu|normal|REQUEUED|2026-11-13T11:04:57|2026-11-13T11:41:40|2026-11-13T12:21:40|2400|billing=14,cpu=14,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-02
+1981059|idea-s-x-phi4-s2|gpu|normal|REQUEUED|2026-11-13T11:25:32|2026-11-13T12:01:49|2026-11-13T12:41:49|2400|billing=14,cpu=14,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-02
+1981066|idea-s-x-phi4_pv1-prep|gpu|normal|COMPLETED|2026-11-13T11:45:32|2026-11-13T12:21:41|2026-11-13T13:11:18|2977|billing=14,cpu=14,energy=667510,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-02
+1981030|idea-s-x-phi4-s0|gpu|normal|COMPLETED|2026-11-13T12:01:49|2026-11-13T12:41:50|2026-11-13T12:42:48|58|billing=14,cpu=14,energy=13045,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-02
+1981031|idea-s-x-phi4-s1|gpu|normal|COMPLETED|2026-11-13T12:21:41|2026-11-13T12:42:48|2026-11-13T12:44:32|104|billing=14,cpu=14,energy=23250,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-02
+1981059|idea-s-x-phi4-s2|gpu|normal|COMPLETED|2026-11-13T12:41:50|2026-11-13T12:44:32|2026-11-13T12:45:28|56|billing=14,cpu=14,energy=12614,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-02
+1981124|idea-s-x-phi4_pv2-prep|gpu|normal|COMPLETED|2026-11-13T12:45:33|2026-11-13T13:43:31|2026-11-13T14:31:49|2898|billing=14,cpu=14,energy=651638,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-02
+1981125|idea-s-x-tulu_final-prep|gpu|normal|COMPLETED|2026-11-13T12:45:33|2026-11-13T13:55:05|2026-11-13T14:01:53|408|billing=10,cpu=10,energy=91385,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981126|idea-s-x-tulu_final-s0|gpu|normal|COMPLETED|2026-11-13T12:45:33|2026-11-13T15:24:06|2026-11-13T16:01:09|2223|billing=10,cpu=10,energy=551302,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981192|idea-s-x-tulu_final-s1|gpu|normal|COMPLETED|2026-11-13T13:15:34|2026-11-13T16:01:28|2026-11-13T16:37:55|2187|billing=10,cpu=10,energy=575201,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981200|idea-s-x-tulu_sft-prep|gpu|normal|COMPLETED|2026-11-13T13:20:34|2026-11-13T15:15:32|2026-11-13T15:23:45|493|billing=10,cpu=10,energy=126455,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981007|idea-s-llama-steer|gpu|gpu|REQUEUED|2026-11-13T13:55:05|2026-11-13T14:01:53|2026-11-13T16:41:53|9600|billing=12,cpu=12,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-02
+1981262|idea-s-x-tulu_sft-s0|gpu|normal|COMPLETED|2026-11-13T14:05:34|2026-11-13T16:37:56|2026-11-13T17:01:03|1387|billing=10,cpu=10,energy=366886,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981312|idea-s-x-tulu_sft-s1|gpu|normal|COMPLETED|2026-11-13T14:35:35|2026-11-13T17:01:08|2026-11-13T17:23:57|1369|billing=10,cpu=10,energy=353461,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981381|idea-s-x-tulu_base-prep|gpu|normal|COMPLETED|2026-11-13T15:20:36|2026-11-13T17:30:34|2026-11-13T17:51:23|1249|billing=10,cpu=10,energy=295537,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1981384|idea-s-x-olmo_instruct_pv1-prep|gpu|normal|COMPLETED|2026-11-13T15:25:36|2026-11-13T17:50:45|2026-11-13T18:18:32|1667|billing=10,cpu=10,energy=445521,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981002|idea-s-olmoi-rand-p2|gpu|gpu|COMPLETED|2026-11-13T15:28:35|2026-11-13T17:43:50|2026-11-13T18:13:29|1779|billing=10,cpu=10,energy=466517,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981412|idea-s-x-tulu_dpo-prep|gpu|normal|COMPLETED|2026-11-13T15:50:36|2026-11-13T18:13:30|2026-11-13T18:21:15|465|billing=10,cpu=10,energy=121500,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981430|idea-s-x-tulu_dpo-s0|gpu|normal|COMPLETED|2026-11-13T16:05:36|2026-11-13T19:28:01|2026-11-13T19:50:22|1341|billing=10,cpu=10,energy=319040,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1981462|idea-s-x-tulu_dpo-s1|gpu|normal|COMPLETED|2026-11-13T16:40:37|2026-11-13T20:08:35|2026-11-13T20:30:46|1331|billing=10,cpu=10,energy=320812,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1981007|idea-s-llama-steer|gpu|gpu|REQUEUED|2026-11-13T16:41:54|2026-11-13T17:28:34|2026-11-13T20:08:35|9601|billing=12,cpu=12,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-01
+1981486|idea-s-x-olmo_instruct_sp-prep|gpu|normal|COMPLETED|2026-11-13T16:55:37|2026-11-13T18:21:15|2026-11-13T18:23:32|137|billing=10,cpu=10,energy=36053,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981501|idea-s-x-olmo_instruct_sp-s0|gpu|normal|COMPLETED|2026-11-13T17:05:38|2026-11-13T20:55:56|2026-11-13T21:27:14|1878|billing=10,cpu=10,energy=505895,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981542|idea-s-x-olmo_instruct_sp-s1|gpu|normal|COMPLETED|2026-11-13T17:25:38|2026-11-13T21:04:27|2026-11-13T21:33:14|1727|billing=10,cpu=10,energy=475853,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981635|idea-s-x-llama_sp-prep|gpu|normal|COMPLETED|2026-11-13T17:45:38|2026-11-13T22:01:44|2026-11-13T22:04:59|195|billing=10,cpu=10,energy=45343,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-04
+1981678|idea-s-x-llama_sp-s0|gpu|normal|COMPLETED|2026-11-13T17:55:38|2026-11-13T23:07:17|2026-11-13T23:35:39|1702|billing=10,cpu=10,energy=393229,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981734|idea-s-x-llama_sp-s1|gpu|normal|COMPLETED|2026-11-13T18:15:44|2026-11-13T23:31:19|2026-11-13T23:58:23|1624|billing=10,cpu=10,energy=383647,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1981747|idea-s-x-olmo_instruct_pv2-prep|gpu|normal|COMPLETED|2026-11-13T18:20:45|2026-11-13T22:06:32|2026-11-13T22:34:00|1648|billing=10,cpu=10,energy=427973,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1981759|idea-s-x-olmo_sft-prep|gpu|normal|COMPLETED|2026-11-13T18:25:45|2026-11-13T23:39:57|2026-11-14T00:12:43|1966|billing=10,cpu=10,energy=420110,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-04
+1981760|idea-s-x-olmo_dpo-prep|gpu|normal|COMPLETED|2026-11-13T18:25:45|2026-11-13T23:45:30|2026-11-14T00:18:24|1974|billing=10,cpu=10,energy=496827,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-02
+1981941|idea-s-x-olmo13_instruct_pv1-prep|gpu|normal|COMPLETED|2026-11-13T19:31:03|2026-11-13T19:50:22|2026-11-13T20:28:22|2280|billing=14,cpu=14,energy=547586,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-01
+1981949|idea-s-x-olmo13_instruct_pv2-prep|gpu|normal|COMPLETED|2026-11-13T19:36:03|2026-11-13T20:03:37|2026-11-13T20:55:49|3132|billing=14,cpu=14,energy=838895,gres/gpu=1,mem=48G,node=1|48G|0:0|oat-03
+1981953|idea-s-x-llama_pv1-prep|gpu|normal|COMPLETED|2026-11-13T19:51:03|2026-11-14T00:22:52|2026-11-14T00:52:16|1764|billing=10,cpu=10,energy=385914,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-05
+1981010|idea-s-llama-unst-p2|gpu|gpu|REQUEUED|2026-11-13T20:03:37|2026-11-13T21:27:14|2026-11-13T23:07:17|6003|billing=10,cpu=10,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-03
+1981007|idea-s-llama-steer|gpu|gpu|REQUEUED|2026-11-13T20:08:35|2026-11-13T20:28:22|2026-11-13T23:08:23|9601|billing=12,cpu=12,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-01
+1981981|idea-s-x-llama_pv2-prep|gpu|normal|COMPLETED|2026-11-13T20:31:04|2026-11-14T00:53:59|2026-11-14T01:22:16|1697|billing=10,cpu=10,energy=379213,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-04
+1981010|idea-s-llama-unst-p2|gpu|gpu|COMPLETED|2026-11-13T23:07:17|2026-11-14T03:35:59|2026-11-14T04:32:51|3412|billing=10,cpu=10,energy=780059,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-04
+1981007|idea-s-llama-steer|gpu|gpu|REQUEUED|2026-11-13T23:08:23|2026-11-13T23:26:34|2026-11-14T02:06:36|9602|billing=12,cpu=12,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-01
+1981013|idea-s-llama-unst-p5|gpu|gpu|COMPLETED|2026-11-13T23:44:44|2026-11-14T03:40:02|2026-11-14T04:52:29|4347|billing=10,cpu=10,energy=1157054,gres/gpu=1,mem=32G,node=1|32G|0:0|oat-01
+1981007|idea-s-llama-steer|gpu|gpu|REQUEUED|2026-11-14T02:06:37|2026-11-14T02:09:09|2026-11-14T04:49:13|9604|billing=12,cpu=12,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-05
+1981007|idea-s-llama-steer|gpu|gpu|REQUEUED|2026-11-14T04:49:13|2026-11-14T04:53:11|2026-11-14T07:33:14|9603|billing=12,cpu=12,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-01
+1981007|idea-s-llama-steer|gpu|gpu|REQUEUED|2026-11-14T07:33:15|2026-11-14T07:38:03|2026-11-14T10:18:06|9603|billing=12,cpu=12,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-05
+1981007|idea-s-llama-steer|gpu|gpu|REQUEUED|2026-11-14T10:18:07|2026-11-14T10:46:54|2026-11-14T13:26:58|9604|billing=12,cpu=12,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-01
+1981007|idea-s-llama-steer|gpu|gpu|COMPLETED|2026-11-14T13:26:58|2026-11-14T14:02:38|2026-11-14T16:09:39|7621|billing=12,cpu=12,energy=1635854,gres/gpu=1,mem=40G,node=1|40G|0:0|oat-05
+1981017|idea-s-llama-steered-p2|gpu|gpu|COMPLETED|2026-11-14T20:00:35|2026-11-15T03:06:30|2026-11-15T05:35:32|8942|billing=24,cpu=22,energy=1745256,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-02
+1985867|idea-p4-probes|normal|normal|FAILED|2026-11-14T21:32:21|2026-11-14T21:33:30|2026-11-14T21:33:37|7|billing=14,cpu=14,mem=48G,node=1|48G|127:0|rye-01
+1985871|idea-p4-probes|normal|normal|COMPLETED|2026-11-14T21:35:50|2026-11-14T21:45:18|2026-11-14T21:53:19|481|billing=14,cpu=14,energy=138600,mem=48G,node=1|48G|0:0|wheat-05
+1981020|idea-s-llama-steered-p5|gpu|gpu|COMPLETED|2026-11-14T22:12:44|2026-11-15T01:25:04|2026-11-15T02:43:22|4698|billing=22,cpu=22,energy=1012223,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1981022|idea-s-llama-rand-p0|gpu|gpu|COMPLETED|2026-11-14T23:10:03|2026-11-15T01:25:34|2026-11-15T01:57:09|1895|billing=22,cpu=22,energy=412061,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1981023|idea-s-llama-rand-p1|gpu|gpu|COMPLETED|2026-11-14T23:23:07|2026-11-15T01:57:18|2026-11-15T02:21:17|1439|billing=22,cpu=22,energy=313162,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1986158|idea-s-rq3v2-olmoi|gpu|normal|COMPLETED|2026-11-14T23:37:30|2026-11-15T00:18:34|2026-11-15T04:41:49|15795|billing=32,cpu=32,energy=3415270,gres/gpu=1,mem=123500M,node=1|123500M|0:0|oat-02
+1986207|idea-s-rq3v2-tulu|gpu|gpu|COMPLETED|2026-11-14T23:41:56|2026-11-15T04:29:40|2026-11-15T06:35:02|7522|billing=22,cpu=22,energy=1605351,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-04
+1986244|idea-s-rq3v2-llama|gpu|gpu|COMPLETED|2026-11-14T23:46:42|2026-11-15T04:42:12|2026-11-15T08:36:37|14065|billing=22,cpu=22,energy=2981156,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-02
+1981024|idea-s-llama-rand-p2|gpu|gpu|COMPLETED|2026-11-14T23:52:48|2026-11-15T02:21:35|2026-11-15T04:40:42|8347|billing=22,cpu=22,energy=1807356,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1981025|idea-s-llama-rand-p3|gpu|gpu|COMPLETED|2026-11-15T00:04:27|2026-11-15T02:43:23|2026-11-15T02:48:20|297|billing=22,cpu=22,energy=65097,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1986873|idea-s-audit2-olmoi-unsteered|gpu|gpu|COMPLETED|2026-11-15T00:50:15|2026-11-15T04:48:13|2026-11-15T04:48:16|3|billing=22,cpu=22,energy=667,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-04
+1986874|idea-s-audit2-olmoi-corrected|gpu|gpu|COMPLETED|2026-11-15T00:50:15|2026-11-15T04:48:43|2026-11-15T04:48:45|2|billing=22,cpu=22,energy=433,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-04
+1986875|idea-s-audit2-olmoi-control|gpu|gpu|COMPLETED|2026-11-15T00:50:15|2026-11-15T04:49:13|2026-11-15T04:49:15|2|billing=22,cpu=22,energy=411,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-04
+1986876|idea-s-audit2-llama-unsteered|gpu|gpu|REQUEUED|2026-11-15T00:50:15|2026-11-15T08:37:05|2026-11-15T14:46:42|22177|billing=22,cpu=22,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-02
+1986877|idea-s-audit2-llama-corrected|gpu|gpu|CANCELLED by 431799|2026-11-15T00:50:15|2026-11-15T08:55:07|2026-11-15T11:11:23|8176|billing=22,cpu=22,energy=1592815,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-04
+1986878|idea-s-audit2-llama-control|gpu|gpu|CANCELLED by 431799|2026-11-15T00:50:15|2026-11-15T09:03:08|2026-11-15T11:11:23|7695|billing=22,cpu=22,energy=1500431,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-04
+1986879|idea-s-audit2-tulu-unsteered|gpu|gpu|COMPLETED|2026-11-15T00:50:16|2026-11-15T06:35:05|2026-11-15T09:02:59|8874|billing=22,cpu=22,energy=1736836,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-04
+1986880|idea-s-audit2-tulu-corrected|gpu|gpu|COMPLETED|2026-11-15T00:50:16|2026-11-15T06:35:35|2026-11-15T08:35:27|7192|billing=22,cpu=22,energy=1387329,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-04
+1986881|idea-s-audit2-tulu-control|gpu|gpu|COMPLETED|2026-11-15T00:50:16|2026-11-15T07:07:09|2026-11-15T09:25:05|8276|billing=22,cpu=22,energy=1800480,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-02
+1986889|idea-s-p4v2-olmo_sft|gpu|gpu|COMPLETED|2026-11-15T00:56:23|2026-11-15T01:03:52|2026-11-15T01:11:02|430|billing=22,cpu=22,energy=101375,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1986890|idea-s-p4v2-olmo_dpo|gpu|gpu|COMPLETED|2026-11-15T00:56:23|2026-11-15T01:11:23|2026-11-15T01:18:12|409|billing=22,cpu=22,energy=89402,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1986891|idea-s-p4v2-olmo_instruct|gpu|gpu|COMPLETED|2026-11-15T00:56:24|2026-11-15T01:18:33|2026-11-15T01:24:59|386|billing=22,cpu=22,energy=83727,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1981026|idea-s-llama-rand-p4|gpu|gpu|COMPLETED|2026-11-15T01:03:09|2026-11-15T02:48:25|2026-11-15T02:59:43|678|billing=22,cpu=22,energy=149169,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1981027|idea-s-llama-rand-p5|gpu|gpu|COMPLETED|2026-11-15T01:03:39|2026-11-15T02:59:59|2026-11-15T04:23:26|5007|billing=22,cpu=22,energy=1088961,gres/gpu=1,mem=82400M,node=1|82400M|0:0|oat-03
+1987309|idea-s-audit2n-olmoi-unsteered|gpu|gpu|FAILED|2026-11-15T10:09:06|2026-11-15T11:11:42|2026-11-15T11:15:06|204|billing=22,cpu=22,energy=41373,gres/gpu=1,mem=88000M,node=1|88000M|1:0|oat-06
+1987310|idea-s-audit2n-olmoi-corrected|gpu|gpu|FAILED|2026-11-15T10:09:07|2026-11-15T11:15:12|2026-11-15T11:18:01|169|billing=22,cpu=22,energy=34243,gres/gpu=1,mem=88000M,node=1|88000M|1:0|oat-06
+1987311|idea-s-audit2n-olmoi-control|gpu|gpu|FAILED|2026-11-15T10:09:07|2026-11-15T11:13:42|2026-11-15T11:17:02|200|billing=22,cpu=22,energy=42272,gres/gpu=1,mem=88000M,node=1|88000M|1:0|oat-04
+1987312|idea-s-audit2n-llama-corrected|gpu|gpu|REQUEUED|2026-11-15T10:09:07|2026-11-15T11:17:32|2026-11-15T13:57:32|9600|billing=22,cpu=22,gres/gpu=1,mem=84000M,node=1|84000M|0:0|oat-04
+1987313|idea-s-audit2n-llama-control|gpu|normal|REQUEUED|2026-11-15T10:09:07|2026-11-15T10:46:10|2026-11-15T12:36:11|6601|billing=32,cpu=32,gres/gpu=1,mem=125G,node=1|125G|0:0|oat-05
+1987400|idea-s-audit2n-olmoi-unsteered|gpu|long|REQUEUED|2026-11-15T11:26:14|2026-11-15T12:48:18|2026-11-15T13:53:19|3901|billing=10,cpu=10,gres/gpu=1,mem=40000M,node=1|40000M|0:0|oat-04
+1987401|idea-s-audit2n-olmoi-corrected|gpu|gpu|COMPLETED|2026-11-15T11:26:14|2026-11-15T13:57:47|2026-11-15T14:17:21|1174|billing=32,cpu=32,energy=225502,gres/gpu=1,mem=124000M,node=1|124000M|0:0|oat-04
+1987402|idea-s-audit2n-olmoi-control|gpu|long|REQUEUED|2026-11-15T11:26:14|2026-11-15T13:15:56|2026-11-15T13:50:11|2055|billing=24,cpu=24,gres/gpu=1,mem=92000M,node=1|92000M|0:0|oat-02
+1987313|idea-s-audit2n-llama-control|gpu|gpu|REQUEUED|2026-11-15T12:36:11|2026-11-15T15:04:57|2026-11-15T15:44:58|2401|billing=32,cpu=24,gres/gpu=1,mem=92000M,node=1|92000M|0:0|oat-01
+1987402|idea-s-audit2n-olmoi-control|gpu|gpu|COMPLETED|2026-11-15T13:50:14|2026-11-15T14:32:37|2026-11-15T14:48:41|964|billing=24,cpu=24,energy=198454,gres/gpu=1,mem=92000M,node=1|92000M|0:0|oat-01
+1987400|idea-s-audit2n-olmoi-unsteered|gpu|long|COMPLETED|2026-11-15T13:53:19|2026-11-15T15:45:08|2026-11-15T15:53:37|509|billing=10,cpu=24,energy=104669,gres/gpu=1,mem=92000M,node=1|92000M|0:0|oat-01
+1987312|idea-s-audit2n-llama-corrected|gpu|gpu|COMPLETED|2026-11-15T13:57:32|2026-11-15T14:38:09|2026-11-15T15:15:25|2236|billing=22,cpu=24,energy=488610,gres/gpu=1,mem=92000M,node=1|92000M|0:0|oat-02
+1986876|idea-s-audit2-llama-unsteered|gpu|gpu|COMPLETED|2026-11-15T14:46:45|2026-11-15T14:48:47|2026-11-15T15:04:50|963|billing=22,cpu=24,energy=198261,gres/gpu=1,mem=92000M,node=1|92000M|0:0|oat-01
+1987313|idea-s-audit2n-llama-control|gpu|gpu|COMPLETED|2026-11-15T15:44:58|2026-11-15T15:53:41|2026-11-15T16:04:02|621|billing=32,cpu=24,energy=127813,gres/gpu=1,mem=92000M,node=1|92000M|0:0|oat-01

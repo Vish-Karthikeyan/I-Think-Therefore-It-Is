@@ -1,0 +1,10 @@
+.venv/
+runs/
+dist/
+.env
+__pycache__/
+*.egg-info/
+.pytest_cache/
+
+# L2D-derived per-item answer dumps are not redistributed (L2D has no license)
+*l2d_answers*.parquet

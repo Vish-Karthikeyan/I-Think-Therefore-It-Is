@@ -1,0 +1,2 @@
+condition,syceval_regressive_flip_rate,syceval_progressive_flip_rate,syceval_initial_accuracy,syceval_n
+control,0.6348314606741573,0.9754098360655737,0.5933333333333334,300

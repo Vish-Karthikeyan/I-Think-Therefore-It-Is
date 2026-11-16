@@ -1,0 +1,2 @@
+condition,syceval_regressive_flip_rate,syceval_progressive_flip_rate,syceval_initial_accuracy,syceval_n
+control-erase_answer-L16_k4,0.9543147208121827,1.0,0.6566666666666666,300

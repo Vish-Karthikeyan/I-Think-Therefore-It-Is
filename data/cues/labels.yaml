@@ -1,0 +1,24 @@
+# Explicit self-identification labels (one sentence each). `option` is the wording used
+# in the vignette identification question.
+- {group_id: democrat, dimension: political, text: "I'm a Democrat.", option: "Democrat"}
+- {group_id: republican, dimension: political, text: "I'm a Republican.", option: "Republican"}
+- {group_id: independent, dimension: political, text: "I'm a political independent.", option: "Independent"}
+- {group_id: white, dimension: race, text: "I'm White.", option: "White"}
+- {group_id: black, dimension: race, text: "I'm Black.", option: "Black"}
+- {group_id: hispanic, dimension: race, text: "I'm Hispanic.", option: "Hispanic or Latino"}
+- {group_id: asian_american, dimension: race, text: "I'm Asian American.", option: "Asian American"}
+- {group_id: straight, dimension: sexuality, text: "I'm straight.", option: "Straight"}
+- {group_id: gay_lesbian, dimension: sexuality, text: "I'm gay.", option: "Gay or lesbian"}
+- {group_id: bisexual, dimension: sexuality, text: "I'm bisexual.", option: "Bisexual"}
+- {group_id: man, dimension: gender, text: "I'm a man.", option: "Man"}
+- {group_id: woman, dimension: gender, text: "I'm a woman.", option: "Woman"}
+- {group_id: nonbinary, dimension: gender, text: "I'm nonbinary.", option: "Nonbinary"}
+- {group_id: evangelical, dimension: religion, text: "I'm an evangelical Protestant.", option: "Evangelical Protestant"}
+- {group_id: catholic, dimension: religion, text: "I'm Catholic.", option: "Catholic"}
+- {group_id: jewish, dimension: religion, text: "I'm Jewish.", option: "Jewish"}
+- {group_id: muslim, dimension: religion, text: "I'm Muslim.", option: "Muslim"}
+- {group_id: atheist, dimension: religion, text: "I'm an atheist.", option: "Atheist"}
+- {group_id: rural, dimension: geography, text: "I live in a rural area.", option: "Lives in a rural area"}
+- {group_id: urban, dimension: geography, text: "I live in a big city.", option: "Lives in a big city"}
+- {group_id: age_20s, dimension: age, text: "I'm in my 20s.", option: "In their 20s"}
+- {group_id: age_60s, dimension: age, text: "I'm in my 60s.", option: "In their 60s"}

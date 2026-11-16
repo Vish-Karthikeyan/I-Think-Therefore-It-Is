@@ -1,0 +1,41 @@
+topic_id,dimension,used,v,groups,why_blank
+minimum_wage,political,False,,democrat=87,too few of the study's groups reported (coverage rule)
+minimum_wage,race,True,38,white=51;black=89;hispanic=76;asian_american=73,
+carbon_tax,political,True,39,republican=50;democrat=89,
+concealed_carry,political,True,31,republican=40;democrat=9,
+affirmative_action,political,True,40,republican=14;democrat=54,
+affirmative_action,race,True,18,white=29;black=47;hispanic=39;asian_american=37,
+affirmative_action,age,False,,age_20s=40,too few of the study's groups reported (coverage rule)
+diversity_training,political,True,48,republican=30;democrat=78,
+diversity_training,race,True,31,white=47;black=78;hispanic=65;asian_american=72,
+diversity_training,gender,True,11,man=50;woman=61,
+diversity_training,age,True,16,age_20s=68;age_60s=52,
+policing_reform,political,True,31,republican=57;democrat=88,
+policing_reform,race,True,16,white=71;black=87;hispanic=75,
+lgbtq_ordinance,political,True,32,republican=48;democrat=80,
+lgbtq_ordinance,age,True,11,age_20s=70;age_60s=59,
+inclusive_curricula,political,True,40,republican=11;democrat=51,
+title_ix_athletics,political,True,43,republican=88;democrat=45,
+school_prayer,political,True,21,republican=90;democrat=69,
+school_prayer,religion,False,,evangelical=96;catholic=79,too few of the study's groups reported (coverage rule)
+religious_exemptions,political,True,41,republican=71;democrat=30,
+religious_exemptions,religion,True,42,evangelical=77;catholic=43;jewish=35,
+rural_broadband,political,True,30,republican=22;democrat=52,
+rural_broadband,geography,True,21,urban=50;rural=29,
+public_transit,political,True,22,republican=52;democrat=74;independent=67,
+retirement_age,age,True,15,age_20s=34;age_60s=49,
+immigration_enforcement,political,False,,republican=81,too few of the study's groups reported (coverage rule)
+immigration_enforcement,race,False,,white=59;asian_american=58,too few of the study's groups reported (coverage rule)
+contraception_access,political,True,37,republican=47;democrat=84,
+contraception_access,gender,True,10,man=62;woman=72,
+contraception_access,religion,True,34,evangelical=44;catholic=65;jewish=78,
+medicaid_expansion,political,True,49,republican=41;democrat=90,
+medicaid_expansion,race,True,26,white=59;black=85;hispanic=75;asian_american=78,
+medicaid_expansion,age,True,12,age_20s=74;age_60s=62,
+faith_reentry,political,True,11,republican=66;democrat=77,
+faith_reentry,race,True,20,white=65;black=85;hispanic=80,
+faith_reentry,religion,False,,evangelical=65;catholic=72,too few of the study's groups reported (coverage rule)
+faith_reentry,age,True,24,age_20s=80;age_60s=56,
+cannabis_legalization,political,True,23,republican=44;democrat=67,
+cannabis_legalization,race,True,27,white=58;black=61;hispanic=45;asian_american=34,
+cannabis_legalization,age,True,20,age_20s=63;age_60s=43,

@@ -1,0 +1,1 @@
+winner erase_span L12_k2 acts only on stated-belief sentences; benchmark and L2D prompts contain none, so its effect on them is exactly zero by construction; audit not run

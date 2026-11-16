@@ -1,0 +1,82 @@
+{
+ "model": "llama",
+ "layers": [
+  4,
+  8,
+  12,
+  16,
+  20,
+  24
+ ],
+ "n_cf_train": 1500,
+ "n_heldout": 300,
+ "sufficiency_best": [
+  {
+   "direction": "neg->pos",
+   "layer": 24,
+   "patch": "whole_last",
+   "n": 299,
+   "mean_gap": 1.3524179533471106,
+   "mean_moved": 1.2392820351308507,
+   "recovery": 0.9163454478430585
+  },
+  {
+   "direction": "neg->pos",
+   "layer": 24,
+   "patch": "answer_U4",
+   "n": 299,
+   "mean_gap": 1.3524179533471106,
+   "mean_moved": 1.224278726466692,
+   "recovery": 0.9052517555218149
+  },
+  {
+   "direction": "neg->pos",
+   "layer": 20,
+   "patch": "whole_last",
+   "n": 299,
+   "mean_gap": 1.3524179533471106,
+   "mean_moved": 1.2176335339323159,
+   "recovery": 0.9003381912512951
+  },
+  {
+   "direction": "neg->pos",
+   "layer": 24,
+   "patch": "answer_U2",
+   "n": 299,
+   "mean_gap": 1.3524179533471106,
+   "mean_moved": 1.2076091001432023,
+   "recovery": 0.8929259606133447
+  },
+  {
+   "direction": "pos->neg",
+   "layer": 24,
+   "patch": "whole_last",
+   "n": 299,
+   "mean_gap": -1.3524179533471106,
+   "mean_moved": -1.1948950061149237,
+   "recovery": 0.8835249511126853
+  }
+ ],
+ "chosen": [
+  [
+   "cr_single",
+   "L16_x16"
+  ],
+  [
+   "erase_span",
+   "L4_k2"
+  ],
+  [
+   "cr_all_layers",
+   "x0.5"
+  ],
+  [
+   "erase_span_multi",
+   "L4-16_k1"
+  ],
+  [
+   "erase_answer",
+   "L16_k4"
+  ]
+ ]
+}

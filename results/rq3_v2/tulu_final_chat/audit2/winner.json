@@ -1,0 +1,7 @@
+{
+ "family": "erase_answer",
+ "setting": "L24_k4",
+ "criterion": "success_exploratory",
+ "gap_closed": 0.8964795371049028,
+ "audit_bar": 0.25
+}

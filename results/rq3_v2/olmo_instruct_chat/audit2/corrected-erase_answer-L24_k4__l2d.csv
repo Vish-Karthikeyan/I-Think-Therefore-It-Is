@@ -1,0 +1,2 @@
+condition,n,parsed_share,source_discernment,truth_discernment,popularity_reliance,reliability_propensity,truth_propensity,correct_defense,n_correct_prior,mean_abs_update
+corrected-erase_answer-L24_k4,371,0.7405189620758483,-0.01615345709460352,-0.07727772925511024,-0.011526465925950795,0.4827586206896552,0.23616236162361623,0.1228070175438597,57,36432.49223768194

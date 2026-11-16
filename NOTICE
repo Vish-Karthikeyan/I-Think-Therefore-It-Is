@@ -1,0 +1,10 @@
+IDEA: Doctoring the Who
+
+Built with Llama.
+
+Llama 3.1 is licensed under the Llama 3.1 Community License, Copyright © Meta Platforms, Inc. All Rights Reserved.
+
+The steering vectors and belief subspaces for Llama 3.1 8B Instruct and the Tülu 3 8B models
+(steering_vectors/llama, steering_vectors/tulu_final) are derived from those models' activations.
+
+OLMo 2 (Ai2) is licensed under the Apache License 2.0. Phi-4 (Microsoft) is licensed under the MIT License.

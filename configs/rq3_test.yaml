@@ -1,0 +1,43 @@
+# Laptop test of the open-weight path on a small real model (OLMo 2 1B Instruct).
+# Not part of the study: results are meaningless; only checks that the code runs.
+name: rq3_test
+seed: 7
+models: [olmo1b_test]
+topics:
+  include: [minimum_wage, carbon_tax, affirmative_action, school_prayer, policing_reform, cannabis_legalization,
+            lubricant_friction, fiber_latency]
+design:
+  q_values: [0.58, 0.60, 0.62]
+  n_range: [10, 30]
+  rate_range: [0.20, 0.80]
+  n_neutral: 4
+  n_belief: 8
+  tier1_scale: 0.5
+  items_per_topic_dir: 10
+  complement_frac: 0.1
+  calibration_frac: 0.05
+elicit:
+  batch_size: 8
+  coverage_min: 0.9
+  sample_k: 4
+  temperature: 1.0
+  chunk: 256
+capture:
+  models: [olmo1b_test]
+  layers: [4, 8, 12]
+steer:
+  layers: [4, 8, 12]
+  sweep_layers: [8]
+  topic_k: [2, 4]
+  k_main: 4
+  multiples: [1]
+  modes: [all]
+  n_eval: 120
+  other_biases: true
+  n_mmlu: 12
+  test_frac: 0.25
+  val_frac: 0.25
+audit:
+  n_syceval: 8
+  lm_eval_limit: 4
+  tasks: [bbq]

@@ -1,0 +1,2 @@
+condition,part,mmlu_pro_chemistry/sample_len,"mmlu_pro_chemistry/exact_match,custom-extract","mmlu_pro_chemistry/exact_match_stderr,custom-extract",mmlu_pro_chemistry/n,mmlu_pro_math/sample_len,"mmlu_pro_math/exact_match,custom-extract","mmlu_pro_math/exact_match_stderr,custom-extract",mmlu_pro_math/n
+unsteered,mmlu_pro:2of7,500,0.338,0.021175665695209407,500,500,0.422,0.022109039310618545,500

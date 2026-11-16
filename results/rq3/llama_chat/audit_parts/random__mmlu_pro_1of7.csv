@@ -1,0 +1,2 @@
+condition,part,mmlu_pro_business/sample_len,"mmlu_pro_business/exact_match,custom-extract","mmlu_pro_business/exact_match_stderr,custom-extract",mmlu_pro_business/n,mmlu_pro_law/sample_len,"mmlu_pro_law/exact_match,custom-extract","mmlu_pro_law/exact_match_stderr,custom-extract",mmlu_pro_law/n
+random,mmlu_pro:1of7,500,0.442,0.02223197069632112,500,500,0.31,0.020704041021724785,500

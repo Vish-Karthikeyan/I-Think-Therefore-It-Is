@@ -1,0 +1,2 @@
+condition,n,parsed_share,source_discernment,truth_discernment,popularity_reliance,reliability_propensity,truth_propensity,correct_defense,n_correct_prior,mean_abs_update
+corrected,3796,0.9487628092976755,0.014430974366036561,0.05307233420507983,0.02333777235762493,0.508130081300813,0.3242759518385942,0.4355345911949685,636,45568868.5269384

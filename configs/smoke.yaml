@@ -1,0 +1,21 @@
+# End-to-end test on the simulated model (no GPU, no API). ~5 minutes on a laptop.
+name: smoke
+seed: 1
+models: [mock, mock_sample]
+design:
+  scale: 0.25
+  items_per_topic_dir: 16
+  complement_frac: 0.1
+  calibration_frac: 0.05
+elicit:
+  chunk: 4000
+capture:
+  models: [mock]
+  layers: [4, 8]
+steer:
+  layers: [4, 8]
+  sweep_layers: [4, 8]
+  multiples: [1, 4]
+  modes: [all]
+  n_eval: 1500
+  other_biases: false

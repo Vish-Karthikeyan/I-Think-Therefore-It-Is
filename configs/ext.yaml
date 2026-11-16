@@ -1,0 +1,44 @@
+# Exploratory additions (approved 2026-11-11; see the design-changes doc). NOT preregistered.
+# Same design and seed as configs/main.yaml, so `idea generate --pilot-run <pilot>` gives the
+# identical trials, in a separate run folder; the main run is never touched.
+name: ext
+seed: 20261110
+models: [olmo13_base, olmo13_sft, olmo13_dpo, olmo13_instruct, phi4,
+         tulu_base, tulu_sft, tulu_dpo, tulu_final,
+         olmo_instruct_sp, llama_sp,
+         olmo_sft, olmo_dpo,
+         olmo_instruct_pv1, olmo_instruct_pv2, llama_pv1, llama_pv2,
+         olmo13_instruct_pv1, olmo13_instruct_pv2, phi4_pv1, phi4_pv2]
+# Stage ladders use labels only, as for the 7B OLMo stages; olmo_sft/olmo_dpo here only add
+# activations (chat, labels) for the stage-wise mechanism analysis.
+reduced_models: [olmo13_base, olmo13_sft, olmo13_dpo, "olmo13_instruct:completion",
+                 tulu_base, tulu_sft, tulu_dpo, "tulu_final:completion", olmo_sft, olmo_dpo]
+design:
+  # Evidence tables approved 2026-11-10 (see the 'IDEA pilot design changes' doc)
+  q_values: [0.58, 0.60, 0.62]
+  n_range: [10, 30]
+  rate_range: [0.20, 0.80]
+  n_neutral: 75          # per group and cue type, Tier 2 (from the pilot power simulation, 2026-11-10)
+  n_belief: 318          # ~150 contradicted + ~150 supported per group and cue type
+  tier1_scale: 0.4
+  items_per_topic_dir: 30
+  p_match: 0.75
+  complement_frac: 0.0
+  calibration_frac: 0.06 # a few thousand calibration trials on open models
+elicit:
+  max_cost_per_run: 15   # USD; each command refuses to start above this estimate and stops when spend reaches it
+  batch_size: 16   # 13-14B models on L40S 48 GB
+  coverage_min: 0.9
+  sample_k: 10
+  sample_k_by_model: {claude: 3}          # trials: Claude has no logprobs; 3 samples per question (approved 2026-11-10)
+  stance_sample_k_by_model: {claude: 5}   # stance + vignette check: 5 samples, reusing answers already paid for
+  temperature: 1.0
+  concurrency: 24
+  chunk: 512
+  subset_by_model: {olmo_instruct_pv1: '0/3', olmo_instruct_pv2: '0/3', llama_pv1: '0/3', llama_pv2: '0/3',
+                    olmo13_instruct_pv1: '0/3', olmo13_instruct_pv2: '0/3', phi4_pv1: '0/3', phi4_pv2: '0/3'}
+capture:
+  models: [olmo_sft, olmo_dpo]
+  layers: [8, 10, 12, 14, 16, 18, 20, 22, 24, 26]
+diag:
+  n_items: 480
