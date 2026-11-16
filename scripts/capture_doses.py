@@ -15,6 +15,11 @@ belief-in-H1 and belief-in-H0 trials at the erase layer (computed from the captu
 needs no extra files). Behavioral response is computed later, on CPU, from cf_trials (analysis/13).
 
 GPU only (needs the model). Small: one forward pass over cf_trials, no generation, one captured layer.
+
+CAUTION: belief_dir is the concrete claim (policy helps/hurts), not the belief relative to the scored hypothesis
+(b). This axis largely reads out the answer the model is about to give (r ~ 0.54-0.64 with the answer's log-odds that
+the policy helps), so it is not a clean belief dose. analysis/13 now uses the cross-fitted b axis within ans_U2
+(from subspace_proj.parquet) and reports this one only for transparency.
 """
 from __future__ import annotations
 import argparse, sys

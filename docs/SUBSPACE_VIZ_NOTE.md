@@ -18,29 +18,44 @@ concept subspaces are made legible.
 ## Our figures and what each shows about the belief subspace
 
 The corrected RQ3 gives us, at each model's erase layer, an answer-position subspace `ans_U2` (2-D) / `ans_U4`
-(4-D) that encodes the user's **stated belief**. `scripts/capture_subspace_viz.py` projects all 1500
-counterfactual trials onto it. A useful structural fact fell out of the projections: the top-2 subspace
-`ans_U2` carries mostly the common-mode *"a belief is present" magnitude* (believe-H1 and believe-H0 barely
-separate on it, Cohen's *d* ≈ 0.1–0.6), whereas the *polarity* — **which** belief — lives in the added
-`ans_U4` dimension (the 3rd basis vector alone gives *d* ≈ −2.2 / +1.7 / +1.6 for OLMo / Llama / Tülu). So the
-figures use the belief axis derived within `ans_U4`. `analysis/14_subspace_viz.py` draws:
+(4-D) that encodes the user's stated belief. `scripts/capture_subspace_viz.py` projects all 1500 counterfactual
+trials onto it.
 
-- **F12 — belief-subspace scatter, colored by stated belief (KEY FIGURE).** This is move (1): each trial
-  plotted as (belief axis, leading orthogonal direction), where the belief axis is the difference-of-class-means
-  direction within `ans_U4` and the y-axis is the leading residual (orthogonal) direction. One panel per model,
-  with class centroids. believe-H1 and believe-H0 form cleanly separated clouds along the belief axis — the
-  direct "you can see the belief direction" plot (Cohen's *d* = 2.09 / 1.01 / 1.45 in the titles).
-- **F13 — same scatter, colored by identity dimension (marker = belief).** The belief split is preserved
-  within every identity dimension (political, religion, gender, …): points of all dimensions intermix along the
-  orthogonal direction, yet the believe-H1 / believe-H0 split along the belief axis holds everywhere. The
-  belief axis is identity-/topic-agnostic, not an artifact of one persona or topic.
-- **F14 — layerwise geometry trajectory.** Move (4): the cosine between the believe-H1 and believe-H0 mean
-  directions vs layer (from `geometry.csv`). It is ~+1 in early layers (a shared "a belief is present" axis)
-  and goes negative by the erase layer (the two beliefs point apart) — the presence→polarity transition, with
-  the erase layer marked. This is the layerwise counterpart of the F12 result: `ans_U2` ≈ the early "presence"
-  geometry, the extra `ans_U4` dimension ≈ the late "polarity" geometry.
-- **F15 — belief-discriminant density.** Move (3): the 1-D histogram of each trial's score on the belief axis,
-  per model; the two belief distributions separate — the classifier/probe view of the same subspace.
+**Two labels for the same belief, which must not be confused.** `b` is the belief relative to the hypothesis the
+model scores (+1 believes H1, −1 believes H0; the model reports P(H1)). `belief_dir = b · h_dir` is the concrete
+claim asserted (policy helps / hurts). H1 is worded in both directions, so the two are crossed across items (within
+one item they coincide).
 
-F12 best mirrors the canonical concept-direction scatter; F13 and F15 are its identity-agnosticism and
-separability complements; F14 is the layer-trajectory view of how the subspace splits presence from polarity.
+**What the projections show** (`analysis/output/rq3_v2/subspace_separation.csv`):
+
+| model | d(`b`) in `ans_U2` | cross-fit (leave topic out) | d(claim) in `ans_U2` | d(claim) in first 3 dims of `ans_U4` |
+|---|---|---|---|---|
+| OLMo 2 7B Instruct (L24) | 5.27 | 5.14 | 0.13 | 2.09 |
+| Llama 3.1 8B Instruct (L16) | 9.36 | 9.31 | 0.22 | 1.01 |
+| Tülu 3 final (L24) | 8.62 | 8.52 | 0.60 | 1.45 |
+
+The 2-D core, which the interchange test shows is sufficient (74–90% recovery), encodes the belief *relative to the
+scored hypothesis*, nearly perfectly, and the concrete claim hardly at all. The claim content appears more weakly in
+the extra `ans_U4` dimensions. The `b` split holds within every identity dimension and with no identity cue
+(smallest within-dimension d: 3.9 / 8.5 / 6.7).
+
+*Correction to an earlier version of this note:* it colored trials by `belief_dir`, saw little separation in
+`ans_U2`, and concluded that `ans_U2` carries only a "belief is present" magnitude with polarity in `ans_U4`. That was
+wrong: the polarity is in `ans_U2`, coded relative to the hypothesis; what `ans_U2` lacks is the concrete claim.
+
+`analysis/14_subspace_viz.py` draws:
+
+- **F12 — `ans_U2` plane (KEY FIGURE).** Top row colored by `b`: two disjoint clouds. Bottom row, the same points
+  colored by the concrete claim: mixed. Move (1), the canonical concept-direction scatter.
+- **F13 — same plane colored by identity dimension (marker = `b`):** the split holds in every dimension.
+- **F14 — layerwise trajectory** (from `geometry.csv`): cosine between the believe-H1 and believe-H0 mean directions,
+  near +1 early (a belief was stated) and negative by the erase layer (which belief). Move (4).
+- **F15 — density** of each trial's score on the `b` axis within `ans_U2`. Move (3).
+
+## Dose–response (analysis/13)
+
+Natural trial-to-trial magnitude on the `b` axis does **not** predict how much contradicting evidence is
+discounted (pooled r = 0.03 / 0.01 / 0.05; within-belief r small and sign-inconsistent). Signing matters: the
+response must be signed by `b` (H1 space). An earlier version signed by `belief_dir`, used the concrete-claim axis
+from `scripts/capture_doses.py` (which correlates 0.54–0.64 with the model's own answer), and got a spurious r up to
+0.62. `doses.parquet` is kept for transparency but is not the primary dose.
