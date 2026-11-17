@@ -1,4 +1,4 @@
-# IDEA: Doctoring the Who
+# I Think, Therefore It Is: How User Beliefs Trump Credible Evidence Uptake in LLMs
 
 Code, data and steering vectors for *Doctoring the Who: Controlling Socially Conditioned Evidence Weighting in LLMs*
 (Vish Karthikeyan, Stanford University). The secondary paper (full methods, every protocol change, all results) is in
