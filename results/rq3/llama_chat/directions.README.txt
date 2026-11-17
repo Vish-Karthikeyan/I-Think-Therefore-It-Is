@@ -1,1 +1,0 @@
-IDEA steering directions. Subtracting a direction (psi > 0) is intended to remove identity-conditioned evidence discounting; adding it (psi < 0) can AMPLIFY the bias. Every released direction is reversible in this way; see the paper's amplification result.

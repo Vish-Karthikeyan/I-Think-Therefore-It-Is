@@ -1,5 +1,5 @@
-"""The seven models (Section 4.3). OLMo revisions are pinned to the commits downloaded on
-FarmShare on 2026-11-10; the HF backend also records the resolved sha in every result."""
+"""Model registry: the study's models with pinned Hugging Face revisions and OpenRouter ids
+(Section 4.3). The HF backend also records the resolved commit in every result."""
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -25,7 +25,7 @@ class ModelSpec:
     # (OpenAI structured output {"probability": int}; logprobs read at the number token), or
     # "tool" (a required function call with one integer argument; sampled K times).
     answer_format: str = "text"
-    # Exploratory additions (2026-11-11; configs/ext.yaml). Defaults leave every prompt unchanged.
+    # Exploratory additions (2026-11-11). Defaults leave every prompt unchanged.
     system_prompt: str | None = None  # prepended as a system message to chat trial prompts
     prompt_variant: int = 0           # reworded trial templates (prompts.VARIANTS); 0 = original
     belief_strength: int = 0          # hedge on the belief sentence (prompts.BELIEF_HEDGES); 0 = original
@@ -71,7 +71,7 @@ MODELS: dict[str, ModelSpec] = {
 }
 
 # ---------------------------------------------------------------------------
-# Exploratory additions (2026-11-11), run from configs/ext.yaml; not preregistered.
+# Exploratory additions (2026-11-11); not preregistered.
 # ---------------------------------------------------------------------------
 DEBIAS_SYSTEM_PROMPT = ("Judge the hypotheses only from the study design and results. The person's own "
                         "views are not evidence and should not affect your answer.")
@@ -103,12 +103,6 @@ MODELS.update({
     # Prompt-wording robustness: reworded templates on a fixed third of trials.
     **{f"{b}_pv{v}": _alias(b, f"pv{v}", prompt_variant=v)
        for b in ("olmo_instruct", "llama", "olmo13_instruct", "phi4") for v in (1, 2)},
-    # Belief-strength experiment (2026-11-16): weak (1) and strong (2) hedges; 0 = original prompt under a new
-    # key (fresh cache), the reproducibility control. Run from configs/bs.yaml.
-    **{f"{b}_bs{v}": _alias(b, f"bs{v}", belief_strength=v)
-       for b in ("olmo_instruct", "llama", "tulu_final", "phi4", "gpt") for v in (0, 1, 2, 3, 4, 5, 6, 7)},
-    # Fresh no-belief baseline for the third-party control (original prompt, b = 0 trials only; configs/tp.yaml).
-    **{f"{b}_nb": _alias(b, "nb") for b in ("olmo_instruct", "llama", "tulu_final", "phi4", "gpt")},
 })
 OLMO13_STAGES = ["olmo13_base", "olmo13_sft", "olmo13_dpo", "olmo13_instruct"]
 TULU_STAGES = ["tulu_base", "tulu_sft", "tulu_dpo", "tulu_final"]

@@ -1,2 +1,0 @@
-condition,part,mmlu_pro_economics/sample_len,"mmlu_pro_economics/exact_match,custom-extract","mmlu_pro_economics/exact_match_stderr,custom-extract",mmlu_pro_economics/n,mmlu_pro_philosophy/sample_len,"mmlu_pro_philosophy/exact_match,custom-extract","mmlu_pro_philosophy/exact_match_stderr,custom-extract",mmlu_pro_philosophy/n
-steered,mmlu_pro:4of7,500,0.546,0.022288147591176952,500,499,0.4168336673346693,0.02209341981265173,499

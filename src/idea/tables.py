@@ -152,25 +152,3 @@ def validate_tables(tables) -> None:
     bad = [t for t in tables if not t.rate_agrees]
     if bad:
         raise ValueError(f"{len(bad)} tables have evidence pointing against their rate comparison, e.g. {bad[0]}")
-
-
-def sample_tables(n: int, rng: random.Random, x_range=(-3.0, 3.0), q_values: Iterable[float] = Q_VALUES,
-                  conflict_frac: float = 0.5, null_frac: float = 0.05, **kw) -> list[Table]:
-    """Draw n base tables: target x uniform on x_range, q cycled, half heuristic-conflicting."""
-    q_values = list(q_values)
-    out = []
-    for i in range(n):
-        q = q_values[i % len(q_values)]
-        if rng.random() < null_frac:
-            out.append(sample_null_table(q, rng, **kw))
-            continue
-        target = rng.uniform(*x_range)
-        # keep |x| away from 0 for non-null tables so omega is defined
-        if abs(target) < 0.15:
-            target = math.copysign(0.15, target if target != 0 else 1)
-        conflict = rng.random() < conflict_frac
-        try:
-            out.append(sample_table(target, q, conflict, rng, **kw))
-        except RuntimeError:
-            out.append(sample_table(target, q, not conflict, rng, **kw))
-    return out

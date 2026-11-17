@@ -1,5 +1,4 @@
-"""Perceived identity stance (Section 4.6, Eq. 2), survey stance, behavioral stance,
-topic screening and the Tier 1 rule.
+"""Perceived identity stance (Section 4.6, Eq. 2), survey stance and behavioral stance.
 
 g(c, H1) = logit p_c - logit p_unsp, where p_unsp is the answer for the matched
 Unspecified cue (same cue type). Each cue (label or vignette) gets its own g, per model,
@@ -7,10 +6,9 @@ per hypothesis direction.
 """
 from __future__ import annotations
 
-import numpy as np
 import pandas as pd
 
-from .cues import DIMENSIONS, GROUP_TO_DIM, UNSPECIFIED, CueLibrary
+from .cues import DIMENSIONS, UNSPECIFIED, CueLibrary
 from .elicit import CachedElicitor, Request, logit
 from .prompts import Topic, stance_completion, stance_prompt
 
@@ -68,44 +66,6 @@ def attach_g(trials: pd.DataFrame, stance: pd.DataFrame) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------------------
-# Screening
-# ---------------------------------------------------------------------------
-
-def screen_topics(stance: pd.DataFrame, g_min: float = 0.5, min_dims: int = 2,
-                  tier1_max: float = 0.25) -> tuple[pd.DataFrame, dict[str, list[str]]]:
-    """Tier 2: keep a topic if >= min_dims dimensions have some group with |g| >= g_min
-    (averaged over that group's cues and over models). Tier 1: keep an item only if every
-    cue has |g| < tier1_max. Returns (per-topic report, dimension -> engaged topics)."""
-    s = stance[stance.group != UNSPECIFIED]
-    grp = s.groupby(["tier", "topic", "dimension", "group", "h_dir"]).g.mean().abs().reset_index()
-    by_dim = grp.groupby(["tier", "topic", "dimension"]).g.max().unstack("dimension")
-    rep = by_dim.copy()
-    rep["n_dims_engaged"] = (by_dim >= g_min).sum(axis=1)
-    rep["max_abs_g_any_cue"] = s.groupby(["tier", "topic"]).g.apply(lambda v: v.abs().max())
-    # Tier 1 (deviation approved 2026-11-11): every Tier 1 topic is kept, because the
-    # preregistered "|g| < tier1_max for every cue" rule removed all of them in the pilot.
-    # The rule is applied instead as a robustness subset (tier1_low_g_pairs).
-    rep["tier1_rule_pass"] = rep.max_abs_g_any_cue < tier1_max
-    rep["keep"] = np.where(rep.index.get_level_values("tier") == 2, rep.n_dims_engaged >= min_dims, True)
-    rep = rep.reset_index()
-    engaged = {d: sorted(rep[(rep.tier == 2) & rep.keep & (rep.get(d, 0) >= g_min)].topic) for d in DIMENSIONS}
-    return rep, engaged
-
-
-def tier1_low_g_pairs(stance: pd.DataFrame, tier1_max: float = 0.25) -> list[list[str]]:
-    """Tier 1 robustness subset: (topic, cue_id) pairs whose |mean g| over models, samples and
-    H1 directions is below tier1_max. Unspecified cues always qualify (g = 0 by definition)."""
-    s = stance[(stance.tier == 1) & (stance.group != UNSPECIFIED)]
-    pc = s.groupby(["topic", "cue_id"]).g.mean().abs()
-    return [list(k) for k in pc[pc < tier1_max].index]
-
-
-def check_dim_coverage(engaged: dict[str, list[str]], min_topics: int = 3) -> dict[str, int]:
-    """Dimensions with fewer than `min_topics` engaged topics (need more topics)."""
-    return {d: len(v) for d, v in engaged.items() if len(v) < min_topics}
-
-
-# ---------------------------------------------------------------------------
 # Survey and behavioral stance
 # ---------------------------------------------------------------------------
 
@@ -128,15 +88,6 @@ def g_behavioral(df: pd.DataFrame) -> pd.DataFrame:
     means = means.join(unsp, on=["model", "topic", "h_dir", "cue_type"])
     means["g_beh"] = means.lp - means.lp_unsp
     return means
-
-
-def stance_spread_report(stance: pd.DataFrame) -> pd.DataFrame:
-    """Pilot check for deflection: per model/dimension/cue type, the SD of g, share of
-    |g| < 0.1, and mean coverage."""
-    s = stance[stance.group != UNSPECIFIED]
-    return s.groupby(["model", "dimension", "cue_type"]).agg(
-        g_sd=("g", "std"), share_near_zero=("g", lambda v: float((v.abs() < 0.1).mean())),
-        coverage=("coverage", "mean"), n=("g", "size")).reset_index()
 
 
 def attach_survey_gap(trials: pd.DataFrame, topics: list) -> pd.DataFrame:

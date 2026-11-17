@@ -1,25 +1,23 @@
 # IDEA datasets: codebook
 
-Complete reference for the three released data files. All are gzip-compressed CSV; pandas, R
+Complete reference for the released data file. It is gzip-compressed CSV; pandas, R
 (`read.csv`) and most tools read `.csv.gz` directly.
 
 | File | Rows | Columns | What it is |
 |---|---|---|---|
 | `main_trials.csv.gz` | 525,042 | 84 | Main run (`study = main`, 6 models) and the exploratory additions (`study = exploratory`, 21 model variants, including Gemini 2.5 Flash and Claude Sonnet 5 added on 2026-11-15). One row per trial × model × prompt format. |
-| `pilot_trials.csv.gz` | 19,068 | 91 | Pilot run (7 models, including Claude Sonnet 5). Same columns, plus the P(H0) complement questions. |
-| `evidence_diagnostic.csv.gz` | 55,200 | 13 | Exploratory addition 1: the same evidence tables with no persona or belief, four kinds of question. |
 
-Built by `analysis/00_build_datasets.py` from the raw run folders, using the study's own loader
-(`idea.pipeline.load_responses`), so every derived column is exactly what the analyses used. That
-script is the only one that needs the `idea` package and the raw `runs/` folders; every later
-analysis script reads only these CSVs.
+Built from the study's raw answers with the study's own code (`idea.runner.derive` for the
+exclusions and log-odds, `idea.stance` for the stance measures), so every derived column is exactly
+what the analyses used. `elicit.py` builds new datasets in this format with the same code, and the
+analysis scripts read only the CSV.
 
 **Reading note (pandas).** The evidence label `e` takes the value `"null"` for tables with no
 evidence. pandas reads the text `null` as missing by default, so read with
-`pd.read_csv(path, keep_default_na=False, na_values=[""])` (as `analysis/common.py` does), or
+`pd.read_csv(path, keep_default_na=False, na_values=[""])` (as the analysis scripts do), or
 null-evidence trials will slip into analyses that should exclude them. The boolean columns
-(`excluded`, `matched_pair`, …) then read as the strings `"True"`/`"False"`/`""`; `common.load_dataset`
-casts them back with `.astype("boolean").fillna(False).astype(bool)`.
+(`excluded`, `matched_pair`, …) then read as the strings `"True"`/`"False"`/`""`; the analysis scripts
+cast them back with `.astype("boolean").fillna(False).astype(bool)`.
 
 ```python
 import pandas as pd
@@ -43,7 +41,7 @@ finding that `y` is flatter in `x` when the table contradicts the user's stated 
 
 ---
 
-## Columns of `main_trials.csv.gz` and `pilot_trials.csv.gz`
+## Columns of `main_trials.csv.gz`
 
 Types: `str` = text, `int`/`float` = numeric, `bool` = boolean (see the reading note above about how
 booleans are stored). "blank" means an empty cell (read as `NaN`/`None`).
@@ -52,12 +50,12 @@ booleans are stored). "blank" means an empty cell (read as `NaN`/`None`).
 
 | Column | Type | Values / range | Meaning and derivation |
 |---|---|---|---|
-| `study` | str | `main`, `exploratory`, `pilot` | Which run the row belongs to. `pilot_trials.csv.gz` is all `pilot`; `main_trials.csv.gz` holds `main` (150,975 rows) and `exploratory` (374,067 rows). |
-| `model` | str | see list below | Model key. Main: `gpt`, `llama`, `olmo_base`, `olmo_sft`, `olmo_dpo`, `olmo_instruct`. Exploratory: `olmo13_*` (OLMo 2 13B stages), `phi4`, `tulu_*` (Tülu 3 stages on Llama 3.1 8B), `*_sp` (debiasing system prompt), `*_pv1`/`*_pv2` (reworded prompts), `gemini` (Gemini 2.5 Flash), `claude` (Claude Sonnet 5, 6,000-trial subset). Pilot also has `claude`. |
+| `study` | str | `main`, `exploratory` | Which part of the study the row belongs to: `main` (150,975 rows, the preregistered models) or `exploratory` (374,067 rows). `elicit.py` writes `main` unless `--study` says otherwise. |
+| `model` | str | see list below | Model key. Main: `gpt`, `llama`, `olmo_base`, `olmo_sft`, `olmo_dpo`, `olmo_instruct`. Exploratory: `olmo13_*` (OLMo 2 13B stages), `phi4`, `tulu_*` (Tülu 3 stages on Llama 3.1 8B), `*_sp` (debiasing system prompt), `*_pv1`/`*_pv2` (reworded prompts), `gemini` (Gemini 2.5 Flash), `claude` (Claude Sonnet 5, 6,000-trial subset). |
 | `fmt` | str | `chat`, `completion` | `chat` = chat template; `completion` = plain-text continuation (base models and stage comparisons). |
 | `trial_id` | str | unique within model×fmt | Trial identifier. The same `trial_id` means the same prompt content across models, so trials can be matched model to model. |
 | `base_model` | str | model key | `model` with any `_sp`/`_pv1`/`_pv2` suffix removed (the original model a variant is compared against). |
-| `model_family` | str | `OLMo 2`, `Tulu 3 (Llama 3.1)`, `Llama 3.1`, `Phi-4`, `GPT-4o`, `Claude Sonnet 5`, `Gemini 2.5 Flash` | Human-readable family, from the model key's root (`FAMILY` map in `00_build_datasets.py`). |
+| `model_family` | str | `OLMo 2`, `Tulu 3 (Llama 3.1)`, `Llama 3.1`, `Phi-4`, `GPT-4o`, `Claude Sonnet 5`, `Gemini 2.5 Flash` | Human-readable family, from the model key's root (`FAMILY` map in `elicit.py`). |
 | `model_size_b` | float | 7, 8, 13, 14, or blank | Parameters in billions; blank for the API models (undisclosed). |
 | `training_stage` | str | `base`, `sft`, `dpo`, `instruct`, `api_chat` | Training stage. `instruct` = the final open-weights instruct model; `api_chat` = a hosted API chat model. |
 | `variant_tag` | str | `sp`, `pv1`, `pv2`, or blank | Exploratory variant marker (blank for the base model). |
@@ -109,8 +107,8 @@ sources, so these columns are shared by many rows.
 | `kappa` | int | 0, 1 | 1 if the evidence contradicts the belief (indicator for `e == "contra"`). |
 | `source` | str | `lab`, `tank` | Who ran the study in the vignette: `lab` = a state-university lab, `tank` = a policy think tank. |
 | `matched_pair` | bool | True/False | The topic engages the identity's own dimension (the Tier-2 pairing rule). |
-| `tier1_low_g` | bool | True/False | **main only.** Tier 1 (topic, cue) pair with mean \|g\| < 0.25 in the pilot (a robustness subset; all Tier 2 rows are True). |
-| `complement` | bool | True/False | **pilot only.** P(H0) was also asked for this trial. |
+| `tier1_low_g` | bool | True/False | Tier 1 (topic, cue) pair with mean \|g\| < 0.25 in the pilot (a robustness subset; all Tier 2 rows are True). |
+| `complement` | bool | False | P(H0) was also asked for this trial (pilot only; always False here). |
 | `calibration` | bool | True/False | **open models.** The trial was also read out by 10 sampled answers (a readout check). |
 
 ### 4. Raw answers
@@ -128,13 +126,10 @@ explain.").
 | `p_post` | float | 0–1 | Answer **after** seeing the table (a separate, fresh conversation). |
 | `cov_prior`, `cov_prior_rep`, `cov_post` | float | 0–1 | Coverage (valid-integer mass) for each of the three answers. |
 | `att_prior`, `att_prior_rep`, `att_post` | int | 0, 1 | Whether the retry/re-prompt was used for each answer. |
-| `retest` | bool | True/False | The paraphrased prior was asked. True for all models except Gemini (1,500 seeded trials) and Claude in `main_trials` (300), which were budget-limited; those trials are **not** excluded for the missing paraphrase. |
-| `readout` | str | `dist`, `sample` | How the answer was read: `dist` = full next-token distribution (primary); `sample` = one sampled answer per question (Claude, Gemini in `main_trials`; Claude three in the pilot). |
+| `retest` | bool | True/False | The paraphrased prior was asked. True for all models except Gemini (1,500 seeded trials) and Claude (300), which were budget-limited; those trials are **not** excluded for the missing paraphrase. |
+| `readout` | str | `dist`, `sample` | How the answer was read: `dist` = full next-token distribution (primary); `sample` = one sampled answer per question (Claude, Gemini). |
 | `p_prior_s`, `p_post_s` | float | 0–1 or blank | **calibration trials (open models).** The same before/after questions read out by sampling instead of the distribution. |
 | `cov_prior_s`, `att_prior_s`, `cov_post_s`, `att_post_s` | float/int | | Coverage and retry flags for the sampled readout. |
-| `p_prior_H0`, `p_post_H0` | float | 0–1 or blank | **pilot only.** Probability placed on H0, before / after. |
-| `cov_prior_H0`, `att_prior_H0`, `cov_post_H0`, `att_post_H0` | float/int | | **pilot only.** Coverage and retry flags for the H0 questions. |
-| `sum_before`, `sum_after` | float | ≈ 1 | **pilot only.** P(H1) + P(H0), before / after (a coherence check; should be near 1). |
 
 ### 5. Derived analysis columns
 
@@ -147,28 +142,9 @@ explain.").
 | `omega` | float | real (≈ −29 … 29) | `y / x`: share of the Bayesian update actually made (1 = fully Bayesian, 0 = ignored the evidence). Undefined/extreme when \|x\| is tiny, so it is only used descriptively. |
 | `bayes_post` | float | real | `lp_before + x`: the log-odds a Bayesian would hold after the table. |
 | `contra`, `support` | int | 0, 1 | Indicators for `e == "contra"` / `e == "support"` (used as the interaction terms in Eq. 3). |
-| `has_belief` | int | 0, 1 | 1 when a belief was stated (`b != 0`). |
+| `has_belief` | bool | True/False | True when a belief was stated (`b != 0`). |
 | `g` | float | real | The model's **perceived stance** of the user's group on H1: logit P(a group member agrees with H1) − logit P(an unspecified person agrees), at the same cue type. 0 for `unspecified`. Estimated in the stance step from the model's own answers. |
 | `m` | float | real | **Congruence** `b · g` (the primary measure). Positive = the stated belief matches the stance the model attributes to the group. |
-| `g_svy`, `m_svy` | float | real | Stance from Pew survey gaps (logit group % − logit all-adults %); `m_svy = b · g_svy`; 0 where no Pew item matches. **main only.** |
+| `g_svy`, `m_svy` | float | real | Stance from Pew survey gaps (logit group % − logit all-adults %); `m_svy = b · g_svy`; 0 where no Pew item matches. |
 | `g_beh`, `m_beh` | float | real | Behavioral stance: the group's no-belief **before** log-odds minus Unspecified's; `m_beh = b · g_beh`. |
 | `has_v`, `v_k` | int/float | | `v_k` = Pew gap for the trial's dimension (in units of 100 points); `has_v` = whether such a Pew item exists. |
-
----
-
-## `evidence_diagnostic.csv.gz`
-
-Exploratory addition 1: the same evidence tables presented with **no persona and no belief**, to
-test whether the models can read and reason about the tables at all. One row per table × question
-kind × model × format (480 tables drawn from the main trials).
-
-| Column | Type | Values / range | Meaning |
-|---|---|---|---|
-| `diag_id` | str | table id | The table (480 tables). |
-| `kind` | str | `rate_t`, `rate_c`, `compare`, `support`, `post` | The question asked: `rate_t`/`rate_c` = read one group's success percentage; `compare` = which group had the higher rate; `support` = which hypothesis the results support more; `post` = the posterior probability for H1. |
-| `truth` | float/int | percent or option index | The correct answer: the true rate in percent (for `rate_*`), or the index of the correct option (0 = A, 1 = B) for the two-option questions. |
-| `p` | float | 0–1 | The model's answer as a probability (`rate_*`, `post`). |
-| `p_option_A`, `p_option_B` | float | 0–1 or blank | Probability the model placed on each option (`compare`, `support`). Option order was counterbalanced (see `flip`). |
-| `flip` | bool | True/False | The two options were presented in reversed order (counterbalancing). |
-| `coverage` | float | 0–1 | Probability mass on valid answers. |
-| `model`, `fmt`, `topic`, `tier`, `x` | | as above | Same meaning as in the trial datasets. |

@@ -1,2 +1,0 @@
-condition,part,mmlu_pro_biology/sample_len,"mmlu_pro_biology/exact_match,custom-extract","mmlu_pro_biology/exact_match_stderr,custom-extract",mmlu_pro_biology/n,mmlu_pro_history/sample_len,"mmlu_pro_history/exact_match,custom-extract","mmlu_pro_history/exact_match_stderr,custom-extract",mmlu_pro_history/n
-random,mmlu_pro:0of7,500,0.618,0.02175082059125084,500,381,0.4251968503937008,0.02536079074855606,381

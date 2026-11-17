@@ -96,7 +96,7 @@ class Cache:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._lock = threading.Lock()
         self._con = sqlite3.connect(self.path, check_same_thread=False, timeout=60)
-        # WAL needs shared memory and is unsafe on NFS (e.g. FarmShare scratch): set
+        # WAL needs shared memory and is unsafe on NFS (shared cluster scratch): set
         # IDEA_SQLITE_JOURNAL=DELETE there. Caches are per model, so one writer per file.
         mode = os.environ.get("IDEA_SQLITE_JOURNAL", "WAL").upper()
         if mode not in ("WAL", "DELETE", "TRUNCATE", "PERSIST"):
@@ -504,8 +504,8 @@ class OpenRouterBackend(Backend):
         if api_key is None:
             from dotenv import load_dotenv
             load_dotenv()
-            # also the project folder's .env (one level above the package), without overriding
-            root_env = Path(__file__).resolve().parents[3] / ".env"
+            # also the repository root's .env, without overriding
+            root_env = Path(__file__).resolve().parents[2] / ".env"
             if root_env.exists():
                 load_dotenv(root_env, override=False)
             api_key = os.environ.get(api_key_env)
@@ -917,7 +917,7 @@ class DeadlineReached(RuntimeError):
 
 
 class BudgetExceeded(RuntimeError):
-    """A run's estimated or actual API cost would pass `max_cost` (elicit.max_cost_per_run)."""
+    """A run's estimated or actual API cost would pass `max_cost` (elicit.py --max-cost)."""
 
 
 class CachedElicitor:
@@ -955,7 +955,7 @@ class CachedElicitor:
             print(f"[{self.b.spec.key}] {len(items)} uncached requests, estimated ${est:.2f} (cap ${cap:.2f})")
             if est > left:
                 raise BudgetExceeded(f"estimated ${est:.2f} for {len(items)} requests exceeds the remaining "
-                                     f"${left:.2f} of the ${cap:.2f} cap; raise elicit.max_cost_per_run to run it")
+                                     f"${left:.2f} of the ${cap:.2f} cap; raise --max-cost to run it")
         it = range(0, len(items), self.chunk)
         if self.progress and items:
             from tqdm.auto import tqdm

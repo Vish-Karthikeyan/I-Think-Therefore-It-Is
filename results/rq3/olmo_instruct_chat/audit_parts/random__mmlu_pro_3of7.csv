@@ -1,2 +1,0 @@
-condition,part,mmlu_pro_computer_science/sample_len,"mmlu_pro_computer_science/exact_match,custom-extract","mmlu_pro_computer_science/exact_match_stderr,custom-extract",mmlu_pro_computer_science/n,mmlu_pro_other/sample_len,"mmlu_pro_other/exact_match,custom-extract","mmlu_pro_other/exact_match_stderr,custom-extract",mmlu_pro_other/n
-random,mmlu_pro:3of7,410,0.35853658536585364,0.02371324732258364,410,500,0.394,0.02187429930168925,500

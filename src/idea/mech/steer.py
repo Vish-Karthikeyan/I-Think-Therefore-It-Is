@@ -135,11 +135,12 @@ def slopes(df: pd.DataFrame) -> dict:
 
 
 def delta_j_spread(df: pd.DataFrame) -> dict:
-    from ..analysis.rq1 import analysis_frame, unequal_deference
+    """SD of delta_j (group-specific drop in the contradicted slope) within each identity dimension."""
+    from .rq1fit import analysis_frame, unequal_deference
     d = analysis_frame(df, 2)
     if len(d) < 200:
         return {}
-    dj, _ = unequal_deference(d)
+    dj = unequal_deference(d)
     return dj.groupby("dimension").delta.std().to_dict()
 
 
@@ -185,15 +186,16 @@ def success(unsteered: dict, steered: dict, tol: float = 0.05, dims=None,
 def evaluate_steering(backend, elicitor_factory, trials: pd.DataFrame, topics, cues, fmt: str,
                       layer: int, direction: np.ndarray, psi: float, mode: str = "all",
                       stance: pd.DataFrame | None = None) -> pd.DataFrame:
-    """Run `trials` with steering set on `backend`; returns derived responses."""
+    """Run `trials` with steering set on `backend`; returns derived responses. (`stance`, the perceived-stance
+    table, only attaches g/m columns; the slopes and the success criterion do not use them.)"""
     from ..runner import derive, run_trials
-    from ..stance import attach_g
     backend.set_steering([(layer, direction, psi, mode)] if psi != 0 else [])
     try:
         res = derive(run_trials(trials, topics, cues, elicitor_factory(backend), fmt, calibration=False))
     finally:
         backend.set_steering([])
     if stance is not None:
+        from ..stance import attach_g
         res = attach_g(res, stance)
     return res
 
@@ -293,31 +295,3 @@ def load_directions(path) -> dict:
             else:
                 rec.setdefault(parts[1], {})[parts[2]] = z[key]
     return out
-
-
-def signature_directions(df: pd.DataFrame, H: np.ndarray, signatures: pd.DataFrame, train_topics: set) -> dict:
-    """RQ3b: one direction per dominant signature, built from that signature's defining
-    behavior on TRAINING topics only."""
-    d = df[df.topic.isin(train_topics)]
-    out = {}
-    for sig, rows in signatures.groupby("signature"):
-        groups = set(rows.group)
-        if sig in ("contradiction_discounting", "discounting(other)", "discounting+confirmation"):
-            r = d_bias_matched(d, H, groups=groups)
-            out[sig] = dict(vec=r["pooled"], groups=groups, kind="discounting")
-        elif sig == "general_hedging":
-            out[sig] = dict(vec=d_prompt_contrast(d, H, groups, evidence=("contra", "support")),
-                            groups=groups, kind="hedging")
-        elif sig == "confirmation_boost":
-            # steepened supported slopes: supported minus neutral on matched items
-            out[sig] = dict(vec=d_prompt_contrast(d, H, groups, evidence=("support",)), groups=groups,
-                            kind="confirmation")
-    return {k: v for k, v in out.items() if v["vec"] is not None}
-
-
-def specificity_matrix(results: dict[tuple[str, str], dict]) -> pd.DataFrame:
-    """results[(direction_signature, evaluated_on_signature)] = success report."""
-    rows = [dict(direction=a, applied_to=b, success=r.get("success"),
-                 **{k: v for k, v in r.items() if k.endswith("gap_after") or k.endswith("gap_before")})
-            for (a, b), r in results.items()]
-    return pd.DataFrame(rows)

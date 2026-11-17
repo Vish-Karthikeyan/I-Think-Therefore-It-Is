@@ -108,7 +108,7 @@ def study_text(topic: Topic, source: str) -> str:
 
 # Prompt-wording robustness (exploratory, 2026-11-11): reworded hypothesis headers and questions.
 # Variant 0 is the original wording (HEADS below and QUESTIONS); 1 and 2 are used only by the
-# *_pv1 / *_pv2 model aliases in configs/ext.yaml.
+# *_pv1 / *_pv2 model aliases (models.py).
 VARIANT_HEADS = {
     1: {0: "Researchers are comparing two explanations, and exactly one of them is true.",
         1: "One, and only one, of these two explanations is correct."},
@@ -195,7 +195,7 @@ class TrialSlots:
     belief_key: str = ""      # trial id: picks the third-party name for levels 6-7 (unused otherwise)
 
 
-# Belief-strength experiment (exploratory, 2026-11-16; docs/BELIEF_STRENGTH_PLAN.md). Every belief sentence in
+# Belief-strength experiment (exploratory, 2026-11-16). Every belief sentence in
 # the topic files is "I think <clause>."; a level swaps only that hedge. Level 0 returns the sentence unchanged.
 BELIEF_HEDGES = {0: "I think ", 1: "I'm inclined to think ", 2: "I'm certain that ",
                  # candidate weak hedges (level 1 was rated no less certain than level 0 by every model in the probe)

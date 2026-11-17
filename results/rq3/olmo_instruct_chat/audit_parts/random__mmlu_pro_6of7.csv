@@ -1,2 +1,0 @@
-condition,part,mmlu_pro_health/sample_len,"mmlu_pro_health/exact_match,custom-extract","mmlu_pro_health/exact_match_stderr,custom-extract",mmlu_pro_health/n,mmlu_pro_psychology/sample_len,"mmlu_pro_psychology/exact_match,custom-extract","mmlu_pro_psychology/exact_match_stderr,custom-extract",mmlu_pro_psychology/n
-random,mmlu_pro:6of7,500,0.412,0.02203367799374086,500,500,0.498,0.02238289498648353,500

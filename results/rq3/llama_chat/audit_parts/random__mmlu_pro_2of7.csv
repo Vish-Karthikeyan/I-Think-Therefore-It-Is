@@ -1,2 +1,0 @@
-condition,part,mmlu_pro_chemistry/sample_len,"mmlu_pro_chemistry/exact_match,custom-extract","mmlu_pro_chemistry/exact_match_stderr,custom-extract",mmlu_pro_chemistry/n,mmlu_pro_math/sample_len,"mmlu_pro_math/exact_match,custom-extract","mmlu_pro_math/exact_match_stderr,custom-extract",mmlu_pro_math/n
-random,mmlu_pro:2of7,500,0.334,0.021113492347743745,500,500,0.422,0.02210903931061855,500

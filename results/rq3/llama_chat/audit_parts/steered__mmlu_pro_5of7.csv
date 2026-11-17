@@ -1,2 +1,0 @@
-condition,part,mmlu_pro_engineering/sample_len,"mmlu_pro_engineering/exact_match,custom-extract","mmlu_pro_engineering/exact_match_stderr,custom-extract",mmlu_pro_engineering/n,mmlu_pro_physics/sample_len,"mmlu_pro_physics/exact_match,custom-extract","mmlu_pro_physics/exact_match_stderr,custom-extract",mmlu_pro_physics/n
-steered,mmlu_pro:5of7,500,0.286,0.020229346329177528,500,500,0.362,0.021513662527582397,500

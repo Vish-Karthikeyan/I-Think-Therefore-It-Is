@@ -184,7 +184,3 @@ def build_trials(topics: list[Topic], cues: CueLibrary, cfg: DesignConfig,
     df["kappa"] = ((df.b * df.d) < 0).astype(int)
     df["e"] = np.select([df.b == 0, df.b * df.d > 0, df.b * df.d < 0], ["neutral", "support", "contra"], "null")
     return items, df
-
-
-def summarize_design(df: pd.DataFrame) -> pd.DataFrame:
-    return (df.groupby(["tier", "cue_type", "e"]).size().unstack(fill_value=0))
