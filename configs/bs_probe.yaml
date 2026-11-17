@@ -1,0 +1,162 @@
+# Belief-strength experiment (exploratory, 2026-11-16; docs/BELIEF_STRENGTH_PLAN.md). Same seed and design
+# as main.yaml, so the same trials. *_bs1 = weak hedge, *_bs2 = strong, *_bs0 = original prompt (reproducibility).
+# Open models: the 0/3 trial-id third (as P6); GPT-4o: the 0/9 ninth inside it ($10 total budget, user 2026-11-16).
+# PROBE: 30 Tier 2 + 10 Tier 1 belief trials per alias.
+name: bs_probe
+seed: 20261110
+models: &id001
+- olmo_instruct_bs0
+- olmo_instruct_bs1
+- olmo_instruct_bs2
+- llama_bs0
+- llama_bs1
+- llama_bs2
+- tulu_final_bs0
+- tulu_final_bs1
+- tulu_final_bs2
+- phi4_bs0
+- phi4_bs1
+- phi4_bs2
+- gpt_bs0
+- gpt_bs1
+- gpt_bs2
+design:
+  q_values:
+  - 0.58
+  - 0.6
+  - 0.62
+  n_range:
+  - 10
+  - 30
+  rate_range:
+  - 0.2
+  - 0.8
+  n_neutral: 75
+  n_belief: 318
+  tier1_scale: 0.4
+  items_per_topic_dir: 30
+  p_match: 0.75
+  complement_frac: 0.0
+  calibration_frac: 0.06
+elicit:
+  max_cost_per_run: 10
+  batch_size: 16
+  batch_size_by_model:
+    olmo_instruct_bs0: 32
+    olmo_instruct_bs1: 32
+    olmo_instruct_bs2: 32
+    llama_bs0: 32
+    llama_bs1: 32
+    llama_bs2: 32
+    tulu_final_bs0: 16
+    tulu_final_bs1: 16
+    tulu_final_bs2: 16
+    phi4_bs0: 16
+    phi4_bs1: 16
+    phi4_bs2: 16
+  coverage_min: 0.9
+  sample_k: 10
+  temperature: 1.0
+  concurrency: 24
+  chunk: 512
+  api_key_env_by_model:
+    gpt_bs0: OPENROUTER_API_KEY_CLAUDE
+    gpt_bs1: OPENROUTER_API_KEY_CLAUDE
+    gpt_bs2: OPENROUTER_API_KEY_CLAUDE
+  subset_by_model:
+    olmo_instruct_bs0: 0/3
+    olmo_instruct_bs1: 0/3
+    olmo_instruct_bs2: 0/3
+    llama_bs0: 0/3
+    llama_bs1: 0/3
+    llama_bs2: 0/3
+    tulu_final_bs0: 0/3
+    tulu_final_bs1: 0/3
+    tulu_final_bs2: 0/3
+    phi4_bs0: 0/3
+    phi4_bs1: 0/3
+    phi4_bs2: 0/3
+    gpt_bs0: 0/9
+    gpt_bs1: 0/9
+    gpt_bs2: 0/9
+  belief_trials_only: *id001
+  trial_subset_by_model:
+    olmo_instruct_bs0:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    olmo_instruct_bs1:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    olmo_instruct_bs2:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    llama_bs0:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    llama_bs1:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    llama_bs2:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    tulu_final_bs0:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    tulu_final_bs1:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    tulu_final_bs2:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    phi4_bs0:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    phi4_bs1:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    phi4_bs2:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    gpt_bs0:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    gpt_bs1:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+    gpt_bs2:
+      n_tier2: 30
+      n_tier1: 10
+      seed: 20261116
+  retest_subset_by_model:
+    olmo_instruct_bs0: 300
+    olmo_instruct_bs1: 300
+    olmo_instruct_bs2: 300
+    llama_bs0: 300
+    llama_bs1: 300
+    llama_bs2: 300
+    tulu_final_bs0: 300
+    tulu_final_bs1: 300
+    tulu_final_bs2: 300
+    phi4_bs0: 300
+    phi4_bs1: 300
+    phi4_bs2: 300
+    gpt_bs0: 300
+    gpt_bs1: 300
+    gpt_bs2: 300
+  no_calibration: *id001
+capture:
+  models: []

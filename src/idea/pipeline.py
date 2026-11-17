@@ -74,7 +74,8 @@ def _backend(cfg, model_key: str, **over):
     e.update(over)
     kw = {}
     if spec.backend == "hf":
-        kw = dict(batch_size=e.get("batch_size", 8), coverage_min=e.get("coverage_min", 0.9),
+        kw = dict(batch_size=(e.get("batch_size_by_model") or {}).get(model_key, e.get("batch_size", 8)),
+                  coverage_min=e.get("coverage_min", 0.9),
                   sample_k=sample_k_for(cfg, model_key), temperature=e.get("temperature", 1.0),
                   capture_layers=e.get("capture_layers", ()), dtype=e.get("dtype", "auto"))
     elif spec.backend == "openrouter":
@@ -245,6 +246,33 @@ def _reassign_failed_vignettes(trials: pd.DataFrame, rd: Path, model_key: str, l
     return t.drop(index=drop), len(drop)
 
 
+def stage_bcheck(cfg: dict, model_key: str) -> pd.DataFrame:
+    """Manipulation check for the belief-strength experiment (exploratory, 2026-11-16): for every topic,
+    direction and hedge level, (1) which side the writer is on (the stance question, about the claim the
+    sentence asserts) and (2) how certain the writer sounds. 48 topics x 2 directions x 3 levels x 2 questions."""
+    from .elicit import Request
+    from .prompts import BELIEF_LEVELS, belief_certainty_prompt, hedge_belief, stance_prompt
+    rd = run_dir(cfg)
+    backend = _backend(cfg, model_key, sample_k=stance_sample_k(cfg, model_key))
+    reqs, rows = [], []
+    for tp in _topics(cfg):
+        for d in (1, -1):
+            for lvl in (cfg.get("bcheck_levels") or BELIEF_LEVELS):
+                s = hedge_belief(tp.belief(d), lvl, key=f"{tp.topic_id}:{d}")
+                for q, msgs in (("side", stance_prompt(s, tp, d)), ("certainty", belief_certainty_prompt(s))):
+                    r = Request("number", "chat", messages=msgs)
+                    r.answer_format = "text"
+                    reqs.append(r)
+                    rows.append(dict(model=model_key, topic=tp.topic_id, tier=tp.tier, direction=d, level=lvl,
+                                     question=q, sentence=s))
+    res = _elicitor(rd, backend).run(reqs)
+    out = pd.DataFrame(rows).assign(p=[x.p for x in res], coverage=[x.coverage for x in res])
+    (rd / "bcheck").mkdir(exist_ok=True)
+    out.to_parquet(rd / "bcheck" / f"{model_key}.parquet")
+    print(out.groupby(["question", "level"]).p.agg(["mean", "min", "count"]).round(3).to_string())
+    return out
+
+
 def stage_elicit(cfg: dict, model_key: str, fmt: str = "chat", shard: str | None = None,
                  capture: bool | None = None, limit: int | None = None, dry_run: bool = False) -> Path:
     from .runner import run_trials
@@ -264,6 +292,10 @@ def stage_elicit(cfg: dict, model_key: str, fmt: str = "chat", shard: str | None
         h = trials.trial_id.map(lambda t: int(hashlib.md5(t.encode()).hexdigest(), 16) % n)
         trials = trials[h == i]
     ecfg = cfg.get("elicit") or {}
+    if model_key in (ecfg.get("belief_trials_only") or []):  # belief-strength experiment: b != 0 only
+        trials = trials[trials.b != 0]
+    if model_key in (ecfg.get("no_belief_trials_only") or []):  # fresh no-belief baseline: b == 0 only
+        trials = trials[trials.b == 0]
     ts = (ecfg.get("trial_subset_by_model") or {}).get(model_key)
     if ts:  # fixed random subset per tier (budget-limited API models, 2026-11-15); same draw every run
         rs = np.random.default_rng(int(ts.get("seed", 0)))
@@ -286,15 +318,15 @@ def stage_elicit(cfg: dict, model_key: str, fmt: str = "chat", shard: str | None
     if capture is None:
         capture = model_key in cap_cfg.get("models", RQ3_MODELS) and fmt == "chat" and spec.open_weights
     over = {"capture_layers": cap_cfg.get("layers", list(range(8, 28)))} if capture else {}
+    calibration = spec.open_weights and spec.readout == "dist" and model_key not in (ecfg.get("no_calibration") or [])
     if dry_run:
-        return estimate(cfg, trials, model_key, fmt, rd)
+        return estimate(cfg, trials, model_key, fmt, rd, calibration=calibration)
     backend = _backend(cfg, model_key, **over)
     act_dir = rd / "acts" / f"{model_key}_{fmt}" if capture else None
     el = _elicitor(rd, backend, act_dir, chunk=(cfg.get("elicit") or {}).get("chunk", 256), shard=shard)
     from .elicit import DeadlineReached
     try:
-        res = run_trials(trials, _topics(cfg), lib, el, fmt, capture=capture,
-                         calibration=spec.open_weights and spec.readout == "dist")
+        res = run_trials(trials, _topics(cfg), lib, el, fmt, capture=capture, calibration=calibration)
     except DeadlineReached as e:
         print(f"DEADLINE: {e}")
         raise
@@ -308,16 +340,19 @@ def stage_elicit(cfg: dict, model_key: str, fmt: str = "chat", shard: str | None
     return out
 
 
-def estimate(cfg, trials, model_key, fmt, rd):
+def estimate(cfg, trials, model_key, fmt, rd, calibration: bool | None = None):
     """Count unique model calls and estimate tokens / API cost (OpenRouter list prices)."""
     from .runner import calls_for, make_request
     spec = get_model(model_key)
     tmap = {t.topic_id: t for t in _topics(cfg)}
     lib = _cues(cfg)
+    if calibration is None:
+        calibration = spec.open_weights and spec.readout == "dist"
     seen, chars = set(), 0
     for row in trials.itertuples(index=False):
-        for call in calls_for(row, spec.open_weights and spec.readout == "dist"):
-            r = make_request(row, tmap, lib, fmt, call)
+        for call in calls_for(row, calibration):
+            r = make_request(row, tmap, lib, fmt, call, variant=spec.prompt_variant, system=spec.system_prompt,
+                             belief_strength=spec.belief_strength)
             k = r.prompt_repr()
             if k not in seen:
                 seen.add(k)

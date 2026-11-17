@@ -17,28 +17,33 @@ import pandas as pd
 
 from .cues import CueLibrary
 from .elicit import CachedElicitor, Request, logit
-from .prompts import Topic, TrialSlots, chat_trial, completion_trial
+from .prompts import Topic, TrialSlots, chat_trial, completion_trial, hedge_belief
 from .tables import Table
 
 
-def slots_for(row, topics: dict[str, Topic], cues: CueLibrary, with_table: bool) -> TrialSlots:
+def slots_for(row, topics: dict[str, Topic], cues: CueLibrary, with_table: bool, belief_strength: int = 0) -> TrialSlots:
     tab = Table(int(row.n_t), int(row.k_t), int(row.n_c), int(row.k_c), float(row.q)) if with_table else None
     return TrialSlots(cue_text=cues.by_id(row.cue_id).text, topic=topics[row.topic], source=row.source,
                       h_dir=int(row.h_dir), q=float(row.q), belief_dir=int(row.belief_dir), table=tab,
-                      results_as_list=bool(row.results_as_list), treated_first=bool(row.treated_first))
+                      results_as_list=bool(row.results_as_list), treated_first=bool(row.treated_first),
+                      belief_strength=int(belief_strength),
+                      belief_key=str(row.trial_id) if int(belief_strength) else "")
 
 
 def make_request(row, topics, cues, fmt: str, call: str, capture: bool = False,
-                 variant: int = 0, system: str | None = None) -> Request:
+                 variant: int = 0, system: str | None = None, belief_strength: int = 0) -> Request:
     with_table = call.startswith("post")
     paraphrase = 1 if call == "prior_rep" else 0
     target = "H0" if call.endswith("_H0") else "H1"
-    s = slots_for(row, topics, cues, with_table)
+    s = slots_for(row, topics, cues, with_table, belief_strength)
     meta = dict(call="post" if with_table else ("prior_rep" if call == "prior_rep" else "prior"),
                 target=target, topic=row.topic, h_dir=int(row.h_dir), cue_id=row.cue_id, group=row.group,
                 b=int(row.b), x=float(row.x), tier=int(row.tier),
                 # stated-belief sentence (for span interventions; not part of the prompt key)
-                span=s.topic.belief(s.belief_dir) if s.belief_dir != 0 else None)
+                span=hedge_belief(s.topic.belief(s.belief_dir), s.belief_strength, s.belief_key or None)
+                if s.belief_dir != 0 else None)
+    if belief_strength:
+        meta["belief_strength"] = int(belief_strength)
     readout = "sample" if call.endswith("_s") else None
     if fmt == "chat":
         return Request("number", "chat", messages=chat_trial(s, paraphrase, target, variant, system), readout=readout,
@@ -65,13 +70,15 @@ def run_trials(trials: pd.DataFrame, topics: list[Topic], cues: CueLibrary, elic
     tmap = {t.topic_id: t for t in topics}
     spec = elicitor.b.spec
     variant, system = getattr(spec, "prompt_variant", 0), getattr(spec, "system_prompt", None)
-    if (variant or system) and fmt != "chat":
-        raise ValueError(f"{spec.key}: prompt variants and system prompts are chat-only")
+    strength = getattr(spec, "belief_strength", 0)
+    if (variant or system or strength) and fmt != "chat":
+        raise ValueError(f"{spec.key}: prompt variants, system prompts and belief strengths are chat-only")
     reqs, index = [], []
     for row in trials.itertuples(index=False):
         for call in calls_for(row, calibration):
             cap = capture and call == "post"   # probes and directions use the posterior prompt
-            reqs.append(make_request(row, tmap, cues, fmt, call, capture=cap, variant=variant, system=system))
+            reqs.append(make_request(row, tmap, cues, fmt, call, capture=cap, variant=variant, system=system,
+                                     belief_strength=strength))
             index.append((row.trial_id, call))
     results = elicitor.run(reqs)
     recs: dict[str, dict] = {}

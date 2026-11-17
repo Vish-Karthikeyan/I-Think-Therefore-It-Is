@@ -44,7 +44,7 @@ def main(argv=None):
 
 def _main(argv=None):
     ap = argparse.ArgumentParser(prog="idea", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("command", choices=["generate", "cues", "stance", "screen", "elicit", "capture", "pilot", "power",
+    ap.add_argument("command", choices=["generate", "cues", "stance", "screen", "elicit", "capture", "pilot", "power", "bcheck",
                                         "prereg", "fit", "steer", "steer2", "audit2", "p4v2", "audit", "audit-merge", "diag"])
     ap.add_argument("--config", required=True)
     ap.add_argument("--model")
@@ -80,6 +80,8 @@ def _main(argv=None):
     elif a.command in ("elicit", "capture"):
         pipeline.stage_elicit(cfg, need_model(), a.fmt, a.shard, capture=True if (a.capture or a.command == "capture") else None,
                               limit=a.limit, dry_run=a.dry_run)
+    elif a.command == "bcheck":   # belief-strength manipulation check (exploratory)
+        pipeline.stage_bcheck(cfg, need_model())
     elif a.command == "pilot":
         pipeline.stage_pilot_report(cfg)
     elif a.command == "power":

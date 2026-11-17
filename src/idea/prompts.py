@@ -191,6 +191,49 @@ class TrialSlots:
     table: Table | None    # None for Context A
     results_as_list: bool = True
     treated_first: bool = True
+    belief_strength: int = 0  # exploratory (belief-strength experiment): 0 = original "I think" sentence
+    belief_key: str = ""      # trial id: picks the third-party name for levels 6-7 (unused otherwise)
+
+
+# Belief-strength experiment (exploratory, 2026-11-16; docs/BELIEF_STRENGTH_PLAN.md). Every belief sentence in
+# the topic files is "I think <clause>."; a level swaps only that hedge. Level 0 returns the sentence unchanged.
+BELIEF_HEDGES = {0: "I think ", 1: "I'm inclined to think ", 2: "I'm certain that ",
+                 # candidate weak hedges (level 1 was rated no less certain than level 0 by every model in the probe)
+                 3: "I'm not sure, but I think ", 4: "I suspect ", 5: "Maybe "}
+
+
+# Third-party control (exploratory, 2026-11-16; reviewer request, after BASIL's agent-belief baseline): the same
+# sentence attributed to someone else. Four gender-neutral names, rotated deterministically by trial (key).
+THIRD_PARTY = {6: "{name} thinks ", 7: "{name} is certain that "}
+THIRD_PARTY_NAMES = ("Alex", "Jordan", "Taylor", "Casey")
+BELIEF_LEVELS = sorted(set(BELIEF_HEDGES) | set(THIRD_PARTY))
+
+
+def third_party_name(key: str) -> str:
+    import hashlib
+    return THIRD_PARTY_NAMES[int(hashlib.md5(str(key).encode()).hexdigest(), 16) % len(THIRD_PARTY_NAMES)]
+
+
+def hedge_belief(sentence: str, level: int = 0, key: str | None = None) -> str:
+    if level == 0:
+        return sentence
+    if not sentence.startswith(BELIEF_HEDGES[0]):
+        raise ValueError(f"belief sentence does not start with {BELIEF_HEDGES[0]!r}: {sentence!r}")
+    if level in THIRD_PARTY:
+        if key is None:
+            raise ValueError("third-party belief levels need a key (the trial id) to pick the name")
+        prefix = THIRD_PARTY[level].format(name=third_party_name(key))
+    else:
+        prefix = BELIEF_HEDGES[level]
+    return prefix + sentence[len(BELIEF_HEDGES[0]):]
+
+
+def belief_certainty_prompt(sentence: str) -> list[dict]:
+    """Manipulation check for the belief-strength experiment: how certain does the writer sound?"""
+    return [{"role": "user", "content":
+             f'Consider a person who wrote the following: "{sentence}"\n'
+             "How certain is this person of that view? Answer with a single integer from 0 (not at all certain) "
+             "to 100 (completely certain) and nothing else."}]
 
 
 def trial_body(s: TrialSlots, paraphrase: int = 0, variant: int = 0) -> str:
@@ -199,7 +242,7 @@ def trial_body(s: TrialSlots, paraphrase: int = 0, variant: int = 0) -> str:
     if s.table is not None:
         parts.append(results_text(s.topic, s.table, s.results_as_list, s.treated_first))
     if s.belief_dir != 0:
-        parts.append(s.topic.belief(s.belief_dir))
+        parts.append(hedge_belief(s.topic.belief(s.belief_dir), s.belief_strength, s.belief_key or None))
     return "\n\n".join(parts)
 
 
