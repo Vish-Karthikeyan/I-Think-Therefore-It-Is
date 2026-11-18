@@ -49,6 +49,7 @@ ANALYSES = {
     "primary": True,               # Results, RQ1: beta, Delta_b, theta_cong, s per model x format, Holm
     "joint_tests": True,           # Results, RQ1: do the models differ? Wald test per study x format
     "robustness": True,            # Appendix, robustness: g_svy, g_beh, weakest proxies dropped, 0.8 cutoff, Tier 1 low |g|
+    "few_clusters": True,          # Appendix, robustness: wild cluster bootstrap, topic bootstrap, leave-one-topic-out (17 topics)
     "mixed_model": False,          # Appendix, robustness: mixed model (item intercepts, topic slopes); SLOW, ~1.5 min per 8,500 trials
     "unequal_deference": True,     # Results, unequal deference: delta_j per group, equality within each dimension
     "cue_type": True,              # Results, cue type: labels vs vignettes
@@ -535,6 +536,76 @@ def robustness(df: pd.DataFrame) -> dict:
     out["tier1_low_g_tier_contrast"] = pd.concat(tiers, ignore_index=True)
     out["tier1_low_g_delta_j_tier1"] = pd.concat(dj1, ignore_index=True)
     return out
+
+
+FEW_CLUSTER_DRAWS = 9999      # wild-bootstrap and topic-bootstrap draws per model x format
+
+
+def few_clusters(df: pd.DataFrame) -> dict:
+    """Inference for Delta_b and theta_cong that does not lean on many clusters (Tier 2 has 17 topics).
+
+    * wild cluster restricted bootstrap: impose the null (drop the term), flip each topic's restricted
+      residuals with Rademacher weights, refit, and compare the topic-clustered (CR1) t with its
+      bootstrap distribution; p = (count |t*| >= |t| + 1) / (draws + 1)
+    * topic pairs bootstrap: resample whole topics with replacement, 2.5/97.5 percentiles of the estimate
+    * leave-one-topic-out: refit 17 times, report the range of the estimate and the largest CR1 p
+
+    Uses per-topic sufficient statistics (X'X and X'y per topic), so every draw is a small solve; the
+    point estimate and CR1 SE are checked against the statsmodels fit. Each model x format has its own
+    seed, so results do not depend on which models are selected. Reworded (_pv1/_pv2) and
+    system-prompt (_sp) runs are skipped (they are compared on matched trials elsewhere)."""
+    import zlib
+    rows = []
+    for model, fmt in model_formats(df):
+        if model.endswith(("_pv1", "_pv2", "_sp")):
+            continue
+        d = frame(df, 2, model, fmt)
+        if len(d) < 50:
+            continue
+        yd, Xd = patsy.dmatrices(formula(BASE_TERMS, d), d, return_type="dataframe")
+        names, y, X = list(Xd.columns), yd.values.ravel(), Xd.values
+        n, k = X.shape
+        g = d.topic.astype("category").cat.codes.values
+        G = int(g.max()) + 1
+        A = np.stack([X[g == h].T @ X[g == h] for h in range(G)])
+        c = np.stack([X[g == h].T @ y[g == h] for h in range(G)])
+        Ai = np.linalg.pinv(A.sum(0))
+        b = Ai @ c.sum(0)
+
+        def cr1(cs, bs):
+            S = cs - A @ bs
+            return np.sqrt(np.diag(Ai @ (S.T @ S) @ Ai * (G / (G - 1)) * ((n - 1) / (n - k))))
+
+        fit = fit_ols(d)
+        rng = np.random.default_rng([20261117, zlib.crc32(f"{model}|{fmt}".encode())])
+        W = rng.choice([-1.0, 1.0], (FEW_CLUSTER_DRAWS, G))
+        P = rng.integers(0, G, (FEW_CLUSTER_DRAWS, G))
+        boot = np.array([np.linalg.pinv(A[p].sum(0)) @ c[p].sum(0) for p in P])
+        topics = d.topic.unique()
+        loto = [fit_ols(d[d.topic != t].reset_index(drop=True)) for t in topics]
+        row = dict(model=model, fmt=fmt, n=n, topics=G)
+        for term, key in (("x:contra", "delta_b"), ("x:contra:m", "theta_cong")):
+            j, e = names.index(term), coef(fit, term)
+            assert abs(e["est"] - b[j]) < 1e-9 and abs(e["se"] - cr1(c, b)[j]) < 1e-9
+            t0 = b[j] / cr1(c, b)[j]                       # same as e["se"], computed the way the draws are
+            keep = [i for i in range(k) if i != j]
+            br = np.zeros(k)
+            br[keep] = np.linalg.pinv(A.sum(0)[np.ix_(keep, keep)]) @ c.sum(0)[keep]
+            cf = A @ br                                    # per-topic X'(fitted under the null)
+            cu = c - cf                                    # per-topic X'(restricted residuals)
+            hits = 0
+            for w in W:
+                cs = cf + w[:, None] * cu
+                bs = Ai @ cs.sum(0)
+                hits += abs(bs[j] / cr1(cs, bs)[j]) >= abs(t0)
+            lo = [coef(f, term) for f in loto]
+            row.update({key: e["est"], f"{key}_p_cr1": e["p"], f"{key}_p_wcr": (hits + 1) / (FEW_CLUSTER_DRAWS + 1),
+                        f"{key}_boot_lo": float(np.percentile(boot[:, j], 2.5)),
+                        f"{key}_boot_hi": float(np.percentile(boot[:, j], 97.5)),
+                        f"{key}_loto_min": min(r["est"] for r in lo), f"{key}_loto_max": max(r["est"] for r in lo),
+                        f"{key}_loto_max_p": max(r["p"] for r in lo)})
+        rows.append(row)
+    return {"few_clusters": pd.DataFrame(rows)}
 
 
 def mixed_model(df: pd.DataFrame) -> dict:
@@ -1157,6 +1228,9 @@ FUNCS = {name: globals()[name] for name in ANALYSES}
 SHOW = {
     ("primary", "per_model"): ["model", "fmt", "n", "beta_neutral", "rho", "delta_b", "delta_b_se", "delta_b_p",
                                "holm_delta_b", "theta_cong", "theta_se", "theta_p", "holm_theta", "support_shift"],
+    ("few_clusters", "few_clusters"): ["model", "fmt", "n", "delta_b", "delta_b_p_cr1", "delta_b_p_wcr",
+                                       "delta_b_loto_min", "delta_b_loto_max", "theta_cong", "theta_cong_p_cr1",
+                                       "theta_cong_p_wcr", "theta_cong_boot_lo", "theta_cong_boot_hi"],
     ("mixed_model", "per_model"): ["model", "fmt", "n", "beta_neutral", "delta_b", "delta_b_se", "holm_delta_b",
                                    "theta_cong", "theta_se", "holm_theta"],
     ("training_stages", "ladders"): ["ladder", "fmt", "model", "n", "beta_neutral", "delta_b", "delta_b_se",
